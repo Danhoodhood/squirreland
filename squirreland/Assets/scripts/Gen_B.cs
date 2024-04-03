@@ -14,6 +14,7 @@ public class Gen_B : MonoBehaviour
     [SerializeField]
     private float[] speed;
     [SerializeField]
+    public float varriable_speed = 17f;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,7 @@ public class Gen_B : MonoBehaviour
                 if (!obj.activeSelf)
                 {
                     obj.transform.position = transform.position;
-                    obj.GetComponent<Move_obj>().speed = speed[i]*10f;
+                    obj.GetComponent<Move_obj>().speed = speed[i]*varriable_speed;
                     obj.SetActive(true);
 
                     var sr = obj.GetComponent<Image>();
