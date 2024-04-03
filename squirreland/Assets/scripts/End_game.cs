@@ -20,6 +20,7 @@ public class End_game : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Save_progress.Save();
         Time.timeScale = 1;
         StartCoroutine(SomeCoroutine());
     }

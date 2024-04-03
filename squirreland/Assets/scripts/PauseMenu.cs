@@ -41,6 +41,7 @@ public class PauseMenu : MonoBehaviour
 
         GlobalScore.score = 0;
         SceneManager.LoadScene(sceneIndex);
+        Save_progress.Save();
 
     }
 
