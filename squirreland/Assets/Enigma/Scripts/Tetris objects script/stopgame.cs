@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class stopgame : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class stopgame : MonoBehaviour
         {
             GameObject spawner = GameObject.FindGameObjectWithTag("spawner");
             Destroy(spawner);
-            Application.LoadLevel("Game");
+            SceneManager.LoadScene("Game");
 
 
 
