@@ -14,6 +14,22 @@ public class GameManager : MonoBehaviour
 
     private bool hasWon = false;
     private bool hasLost = false;
+    // загрузка сцены
+    //public LoadingScreenManager loadingScreenManager;
+    public string startSceneName = "Platformer"; // Сцена, которую вы хотите загрузить при старте
+
+    void Start()
+    {
+        // Вызываем LoadScene через Singleton
+        if (LoadingScreenManager.Instance != null)
+        {
+            LoadingScreenManager.Instance.LoadScene(startSceneName);
+        }
+        else
+        {
+            Debug.LogError("LoadingScreenManager не инициализирован. Убедитесь, что экземпляр создан.");
+        }
+    }
 
     void Update()
     {
