@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI winText;
     public TextMeshProUGUI loseText;
     public Button restartButton;
+    public GameObject LOAD;
     
 
     private bool hasWon = false;
@@ -48,7 +50,7 @@ public class GameManager : MonoBehaviour
     {
 
         winText.gameObject.SetActive(true);
-        SceneManager.LoadScene(3);
+        StartCoroutine(Wait_for_win());
     }
 
     void ShowLoseMessage()
@@ -60,5 +62,10 @@ public class GameManager : MonoBehaviour
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    IEnumerator Wait_for_win()
+    {
+        yield return new WaitForSeconds(2);
+        LOAD.GetComponent<LOAD>().load_please();
     }
 }
