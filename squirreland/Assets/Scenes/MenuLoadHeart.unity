@@ -528,7 +528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f954bc0fb22c564fa9a386f6269680b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: Heart_bit
+  sceneToLoad: 0
   loadScreen: {fileID: 315493841}
   loadMenu: {fileID: 1452247573}
 --- !u!1 &840376622

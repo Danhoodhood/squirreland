@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class LoadingVeta : MonoBehaviour
 {
-    public string sceneToLoad;
+    public int sceneToLoad;
     public GameObject loadScreen;
     public GameObject loadMenu;
 
