@@ -5,7 +5,7 @@ using UnityEngine;
 public class Monster2 : Monser
 {
 
-    private float speed = 3.5f;//скорость
+    //private float speed = 3.5f;//скорость
     private Vector3 dir;//направление движения
     private SpriteRenderer sprite;//спрайт(Sircle внутри монстра2)
 

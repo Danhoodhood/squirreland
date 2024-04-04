@@ -12,7 +12,7 @@ public class Player : Monser
     [SerializeField] private bool isGrounded = false;
 
     [SerializeField]private bool isAttacking = false; // атакуем ли
-    [SerializeField] private bool isRecharged = false; // перезаредились ли
+    //[SerializeField] private bool isRecharged = false; // перезаредились ли
 
     public Transform attackPos;//позиция атаки 
     public float attackRange;//дальность атаки
@@ -31,7 +31,7 @@ public class Player : Monser
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponentInChildren<SpriteRenderer>();
         Instance = this;
-        isRecharged=true;
+        //isRecharged=true;
 
 
         lives = 5;
