@@ -14,21 +14,12 @@ public class GameManager : MonoBehaviour
 
     private bool hasWon = false;
     private bool hasLost = false;
-    // загрузка сцены
-    //public LoadingScreenManager loadingScreenManager;
-    public string startSceneName = "Platformer"; // Сцена, которую вы хотите загрузить при старте
+  
 
     void Start()
     {
-        // Вызываем LoadScene через Singleton
-        if (LoadingScreenManager.Instance != null)
-        {
-            LoadingScreenManager.Instance.LoadScene(startSceneName);
-        }
-        else
-        {
-            Debug.LogError("LoadingScreenManager не инициализирован. Убедитесь, что экземпляр создан.");
-        }
+        Time.timeScale = 1;
+        Save_progress.Save();
     }
 
     void Update()
@@ -55,7 +46,9 @@ public class GameManager : MonoBehaviour
 
     void ShowWinMessage()
     {
+
         winText.gameObject.SetActive(true);
+        SceneManager.LoadScene(3);
     }
 
     void ShowLoseMessage()
