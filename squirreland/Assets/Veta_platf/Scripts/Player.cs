@@ -88,6 +88,7 @@ public class Player : Monser
     }
     public override void GetDamage()
     {
+        HeartSystem.health--;
         lives  -= 1;
         Debug.Log(lives);
     }
