@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // ѕроверка услови€ проигрыша 1: игрок упал вниз
-        if (player.position.y < 0f && !hasLost)
+        if (player.position.y < -200f && !hasLost)
         {
             hasLost = true;
             ShowLoseMessage();

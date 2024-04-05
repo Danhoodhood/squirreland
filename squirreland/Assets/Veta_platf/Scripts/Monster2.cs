@@ -12,7 +12,7 @@ public class Monster2 : Monser
     private void Start()
     {
         dir = transform.right;//начальное направление движения
-        lives = 3;
+        lives = 2;
 
     }
 
