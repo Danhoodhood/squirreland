@@ -3,11 +3,12 @@ using UnityEngine.SceneManagement;
 
 public class Looser : MonoBehaviour
 {
+    public HeartSys HeartSys;
     public GameObject pauseMenu;
     public AudioSource audioSource;
     void Update()
     {
-        if (HeartSystem.health == 0)
+        if (HeartSys.health == 0)
         {
             pauseMenu.SetActive(true);
             audioSource.Pause();

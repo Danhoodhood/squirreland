@@ -7,6 +7,10 @@ public class win_yaric : MonoBehaviour
 {
     public Text text;
     public GameObject load;
+    public void Start()
+    {
+            
+    }
     void Update()
     {
         if (text.text == "4")

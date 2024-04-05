@@ -1866,8 +1866,8 @@ GameObject:
   - component: {fileID: 1674985554}
   - component: {fileID: 1674985553}
   - component: {fileID: 1674985552}
-  - component: {fileID: 1674985551}
   - component: {fileID: 1674985555}
+  - component: {fileID: 1674985551}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1971,9 +1971,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1674985550}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a70c7b525511d5e4a9766d76593aefcb, type: 3}
+  m_Script: {fileID: 11500000, guid: 1cb2a7321bb963a4aac6b30997932f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 3
   Heart1: {fileID: 1483828}
   Heart2: {fileID: 1551370391}
   Heart3: {fileID: 1579157771}
@@ -2669,6 +2670,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5760961462253055596, guid: 4a6e48492a6827144a3435d4e8785b95, type: 3}
+      propertyPath: HeartSys
+      value: 
+      objectReference: {fileID: 1674985555}
     - target: {fileID: 5760961462253055596, guid: 4a6e48492a6827144a3435d4e8785b95, type: 3}
       propertyPath: pauseMenu
       value: 

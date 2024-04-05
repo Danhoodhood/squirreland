@@ -10,7 +10,7 @@ public class Player : Monser
 
     [SerializeField]private bool isAttacking = false; // атакуем ли
     //[SerializeField] private bool isRecharged = false; // перезаредились ли
-
+    public HeartSys HeartSys;
     public Transform attackPos;//позиция атаки 
     public float attackRange;//дальность атаки
     public LayerMask enemy;//
@@ -85,7 +85,7 @@ public class Player : Monser
     }
     public override void GetDamage()
     {
-        HeartSystem.health--;
+        HeartSys.health--;
         lives  -= 1;
         Debug.Log(lives);
     }

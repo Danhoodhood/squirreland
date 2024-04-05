@@ -6,7 +6,7 @@ using UnityEngine;
 public class CkickTrack : MonoBehaviour
 {
 
-    public HeartSystem heartSystem;
+    public HeartSys heartSystem;
 
     void Start()
     {
@@ -20,7 +20,6 @@ public class CkickTrack : MonoBehaviour
 
     private void OnMouseDown()
     {
-        HeartSystem heartSystem = FindObjectOfType<HeartSystem>();
 
         if (heartSystem != null)
         {
