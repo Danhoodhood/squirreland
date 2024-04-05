@@ -270,7 +270,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: /18
+  m_text: /15
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4101,7 +4101,7 @@ MonoBehaviour:
   vin_lose: {fileID: 1484399928}
   score_text: {fileID: 1393803455}
   wait: 29
-  minValue: 17
+  minValue: 14
   maxValue: 20
   minColor: {r: 0.81886786, g: 0.20857947, b: 0.20857947, a: 1}
   maxColor: {r: 0.14185114, g: 0.86415094, b: 0.3344644, a: 1}
