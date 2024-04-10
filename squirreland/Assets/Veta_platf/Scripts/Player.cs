@@ -56,7 +56,7 @@ public class Player : Monser
                     // Проверяем, что игрок прыгает на врага
                     if (transform.position.y > collider.transform.position.y)
                     {
-                        collider.GetComponent<Monser>().GetDamage();
+                       collider.GetComponent<Monser>().GetDamage();
                     }
                 }
             }

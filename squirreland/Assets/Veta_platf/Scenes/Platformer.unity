@@ -1105,6 +1105,11 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.7169878, y: 1.6721761}
   m_EdgeRadius: 0
+--- !u!1 &323747117 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6485213730032890660, guid: a4f9ed5b3f69ccc418028acd073199bc, type: 3}
+  m_PrefabInstance: {fileID: 1607788357}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &333054076
 GameObject:
   m_ObjectHideFlags: 0
@@ -2330,6 +2335,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 164527faaaf06a640a7c50d1d77222f3, type: 3}
+--- !u!1 &536849208 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1548498009944184573, guid: 98315f33b6ea83247a55b70b4dd056c0, type: 3}
+  m_PrefabInstance: {fileID: 2002239547}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &585790158
 GameObject:
   m_ObjectHideFlags: 0
@@ -2533,6 +2543,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &635351836 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2921601059230702607, guid: a547b2fe2cb8aa945ab4d5dedfb5d0c1, type: 3}
+  m_PrefabInstance: {fileID: 293979326}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &685498951
 GameObject:
   m_ObjectHideFlags: 0
@@ -3710,6 +3725,7 @@ GameObject:
   - component: {fileID: 853497323}
   - component: {fileID: 853497322}
   - component: {fileID: 853497321}
+  - component: {fileID: 853497325}
   m_Layer: 5
   m_Name: MENU_BUTTON
   m_TagString: Untagged
@@ -3803,6 +3819,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &853497325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 853497320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a70c7b525511d5e4a9766d76593aefcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Heart1: {fileID: 536849208}
+  Heart2: {fileID: 323747117}
+  Heart3: {fileID: 635351836}
+  audioSource: {fileID: 0}
 --- !u!1001 &877895427
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6432,6 +6464,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a70c7b525511d5e4a9766d76593aefcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Heart1: {fileID: 0}
+  Heart2: {fileID: 0}
+  Heart3: {fileID: 0}
+  audioSource: {fileID: 0}
 --- !u!224 &1731525789 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 733515413340616627, guid: 98315f33b6ea83247a55b70b4dd056c0, type: 3}
