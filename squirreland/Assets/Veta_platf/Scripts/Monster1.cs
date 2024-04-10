@@ -14,15 +14,29 @@ public class Monster1 : Monser//червь
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject == Player.Instance.gameObject)
+        if (collision.gameObject.CompareTag("Player")) // Проверяем, что столкнулись с игроком
         {
-            Player.Instance.GetDamage();
-            lives--;
-            Debug.Log("у червяка " + lives + " жизней");
+            float playerY = collision.gameObject.transform.position.y;
+            float monsterY = transform.position.y;
+
+            if (playerY > monsterY) // Проверяем, что игрок находится выше по оси Y
+            {
+                // Игрок прыгнул на монстра сверху, не наносим урон
+                Debug.Log("Игрок прыгнул на монстра сверху, но урона не наносится.");
+            }
+            else
+            {
+                // Игрок касается монстра сбоку или снизу, наносим урон
+                Player.Instance.GetDamage();
+                lives--;
+                Debug.Log("У монстра " + lives + " жизней");
+
+                if (lives < 1)
+                    Die();
+            }
         }
-        if (lives < 1)
-            Die();
     }
+
 
 
 }

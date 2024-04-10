@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
     {
 
         winText.gameObject.SetActive(true);
-        StartCoroutine(Wait_for_win());
+        //StartCoroutine(Wait_for_win());
     }
 
     void ShowLoseMessage()

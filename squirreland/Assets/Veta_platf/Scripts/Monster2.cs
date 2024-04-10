@@ -36,11 +36,27 @@ public class Monster2 : Monser
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject == Player.Instance.gameObject)
+        if (collision.gameObject.CompareTag("Player")) // Проверяем, что столкнулись с игроком
         {
-            Player.Instance.GetDamage();
-            
+            float playerY = collision.gameObject.transform.position.y;
+            float monsterY = transform.position.y;
+
+            if (playerY > monsterY) // Проверяем, что игрок находится выше по оси Y
+            {
+                // Игрок прыгнул на монстра сверху, наносим урон монстру
+                GetDamage();
+                Debug.Log("Игрок прыгнул на монстра сверху, урон наносится монстру.");
+
+                if (lives < 1)
+                    Die();
+            }
+            else
+            {
+                // Игрок касается монстра сбоку или снизу, урон не наносится игроку
+                Player.Instance.GetDamage();
+                Debug.Log("Монстр касается игрока сбоку или снизу, но урон не наносится.");
+            }
         }
-        
     }
+
 }

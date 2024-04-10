@@ -42,10 +42,25 @@ public class Player : Monser
         sprite.flipX = dir.x < 0.0f;//  ПОВОРОТ ЛЕВО-ПРАВО если направление меньше нуля flipX = true и он поворачивается влево
     }
 
-    private void Jump()
+    public void Jump()
     {
          //rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
         rb.velocity = Vector2.up*jumpForce;
+        if (!isGrounded)
+        {
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.3f);
+            foreach (Collider2D collider in colliders)
+            {
+                if (collider.CompareTag("Enemy"))
+                {
+                    // Проверяем, что игрок прыгает на врага
+                    if (transform.position.y > collider.transform.position.y)
+                    {
+                        collider.GetComponent<Monser>().GetDamage();
+                    }
+                }
+            }
+        }
     }
 
 
@@ -75,7 +90,7 @@ public class Player : Monser
         {
             Run();
         }
-        if (isGrounded &&  joystick.Vertical>=0.55f )
+        if (isGrounded &&  joystick.Vertical>=0.55f )//закоментить все условие при билде
         {
             Jump();
             

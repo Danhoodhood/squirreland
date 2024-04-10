@@ -7,8 +7,8 @@ public class Monser : MonoBehaviour
     protected int lives;
     public virtual void GetDamage()
     {
-        lives--;
-        if(lives < 1)
+        lives -= 1;
+        if (lives <= 0)
         {
             Die();
         }
