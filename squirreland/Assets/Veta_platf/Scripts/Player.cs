@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : Monser
@@ -142,5 +143,24 @@ public class Player : Monser
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPos.position, attackRange);
     }
-    
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name.Equals("moving_platform"))
+        {
+            this.transform.parent = collision.transform;
+        }
+
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.name.Equals("moving_platform"))
+        {
+            this.transform.parent = null;
+        }
+
+    }
+
+
 }
