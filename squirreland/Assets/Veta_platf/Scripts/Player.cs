@@ -144,7 +144,7 @@ public class Player : Monser
         Gizmos.DrawWireSphere(attackPos.position, attackRange);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)//персонаж двигается вместе с платформой когда дотрагивается до нее 
     {
         if (collision.gameObject.name.Equals("moving_platform"))
         {
@@ -153,7 +153,7 @@ public class Player : Monser
 
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionExit2D(Collision2D collision)//персонаж не двигается вместе с платформой
     {
         if (collision.gameObject.name.Equals("moving_platform"))
         {
