@@ -7,6 +7,10 @@ public class Looser : MonoBehaviour
     public AudioSource audioSource;
     void Update()
     {
+        if (timer_for_hide.startTime == 0)
+        {
+            HeartSystem.health = 0;
+        }
         if (HeartSystem.health == 0)
         {
             pauseMenu.SetActive(true);

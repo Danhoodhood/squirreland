@@ -10,6 +10,7 @@ public class ClickControl : MonoBehaviour
 
     void Start()
     {
+        timer_for_hide.startTime = 60;
         Time.timeScale = 1;
     }
 
