@@ -46,7 +46,7 @@ public class Player : Monser
     public void Jump()
     {
          //rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-        rb.velocity = Vector2.up*jumpForce;
+        
         if (!isGrounded)
         {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.3f);
@@ -61,6 +61,10 @@ public class Player : Monser
                     }
                 }
             }
+        }
+        else
+        {
+            rb.velocity = Vector2.up*jumpForce;
         }
     }
 
