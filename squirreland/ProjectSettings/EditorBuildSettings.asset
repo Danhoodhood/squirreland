@@ -6,28 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-<<<<<<< HEAD
-    path: Assets/Veta_platf/Scenes/Platformer.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Enigma/Scenes/menu.unity
-    guid: 19d8fa3e830ad094fb82839962d006e8
-  - enabled: 1
-    path: Assets/Enigma/Scenes/Game.unity
-    guid: 6fc64388c63653b499abe6beaa25fdf9
-=======
     path: Assets/Scenes/main_menu.unity
     guid: 6f626799b44ddf349a35101aaa9cdbe5
   - enabled: 1
-    path: Assets/Veta_platf/Scenes/Platformer.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/Heart_bit.unity
-    guid: 3fc8acdd13e6c734bafef6554d6fdbcd
-  - enabled: 1
-    path: Assets/search_acorns.unity
-    guid: 2265e128ea7cf0743ab540900203f0ca
->>>>>>> 072151b297d24915566b4d00e33fa7a9b212170d
-  m_configObjects:
-    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 1df525cea2f57b140bbbff02c2c8203a, type: 2}
-    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 913775ae344397141ba35843b395f54c, type: 2}
+    path: Assets/Veta_platf/Scenes/MenuLoad.unity
+    guid: 36286438e6f4e6a41ba1a21e09ddd41c
+  m_configObjects: {}
