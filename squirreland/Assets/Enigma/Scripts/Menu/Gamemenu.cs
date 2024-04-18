@@ -27,7 +27,7 @@ public class Gamemenu : MonoBehaviour
     public void Quite()
     {
         Time.timeScale = 1f;
-        Application.LoadLevel("menu");
+        Application.LoadLevel("Main_menu");
     }
 
 }
