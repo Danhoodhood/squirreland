@@ -10,11 +10,6 @@ public class Gamemenu : MonoBehaviour
     [SerializeField]
     private GameObject pausepael;
     
-    void Awake()
-    {
-       pausepael.SetActive(false);
-       
-    }
     public void PauseGame()
     {
         Time.timeScale = 0f;

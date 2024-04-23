@@ -11,6 +11,10 @@ public class MenuController : MonoBehaviour
         SceneManager.LoadScene(PlayerPrefs.GetInt("Last_lvl"));
     }
 
+    public void newgame()
+    {
+        SceneManager.LoadScene(1);
+    }
     public void OpenLevelsMenu()
     {
         mainMenu.SetActive(false);
