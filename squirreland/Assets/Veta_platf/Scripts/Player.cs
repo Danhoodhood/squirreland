@@ -22,7 +22,9 @@ public class Player : Monser
     private SpriteRenderer sprite;
     public static Player Instance { get;  set; }//теперь можно обращатьс€ к методам этого класса из других классов не создава€ экземпл€ра этого класса в другом
     public Joystick joystick;
-    
+    public AudioSource audioSourceJump;
+
+
 
     private void Awake()
     {
@@ -45,8 +47,8 @@ public class Player : Monser
 
     public void Jump()
     {
-         //rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-        
+        //rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+
         if (!isGrounded)
         {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.3f);
@@ -98,7 +100,8 @@ public class Player : Monser
         if (isGrounded &&  joystick.Vertical>=0.55f )//закоментить все условие при билде
         {
             Jump();
-            
+            audioSourceJump.Play();
+
         }
         
         
