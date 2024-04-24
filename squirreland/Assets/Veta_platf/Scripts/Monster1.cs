@@ -6,8 +6,9 @@ using UnityEngine;
 public class Monster1 : Monser//червь
 
 {
-    
-    
+    public AudioSource audioSourceDieMonster;
+
+
     private void Start()
     {
         lives = 2;
@@ -27,7 +28,10 @@ public class Monster1 : Monser//червь
                 Debug.Log("У монстра " + lives + " жизней");
 
                 if (lives < 1)
+                {
+                    audioSourceDieMonster.Play();
                     Die();
+                }
             }
             else
             {
