@@ -24,6 +24,8 @@ public class Player : Monser
     public Joystick joystick;
     public AudioSource audioSourceJump;
     public AudioSource audioSourceDamagePlayer;
+    //[SerializeField] private AudioSource audioSourceDamageMonster;
+    
 
 
 
@@ -60,7 +62,9 @@ public class Player : Monser
                     // Проверяем, что игрок прыгает на врага
                     if (transform.position.y > collider.transform.position.y)
                     {
+                       
                        collider.GetComponent<Monser>().GetDamage();
+                       //audioSourceDamageMonster.Play();
                     }
                 }
             }
@@ -109,9 +113,11 @@ public class Player : Monser
     public override void GetDamage()
     {
         HeartSystem.health--;
-        audioSourceDamagePlayer.Play();
+        
         lives  -= 1;
+
         Debug.Log(lives);
+        audioSourceDamagePlayer.Play();
     }
     private IEnumerator AttackCoolDown()
     {
@@ -130,9 +136,11 @@ public class Player : Monser
             Debug.Log("УДАР");
 
             Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPos.position, attackRange, enemy);
+            
 
             for (int i = 0; i < colliders.Length; i++)
             {
+
                 colliders[i].GetComponent<Monser>().GetDamage();
             }
         }

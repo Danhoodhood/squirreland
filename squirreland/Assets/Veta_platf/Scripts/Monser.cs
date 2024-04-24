@@ -4,22 +4,24 @@ using UnityEngine;
 
 public class Monser : MonoBehaviour
 {
-    public AudioSource audioSourceGetDamage;
+    //public AudioSource audioSourceGetDamage;
     protected int lives;
+    public AudioSource audioSourceDamageMonster;
     public virtual void GetDamage()
     {
 
         lives -= 1;
-        audioSourceGetDamage.Play();
+        //audioSourceGetDamage.Play();
         if (lives <= 0)
         {
-
+            
             Die();
         }
     }
     public virtual void Die()
     {
-
-        Destroy(this.gameObject);
+        audioSourceDamageMonster.Play();
+        Destroy(this.gameObject, 0.5f);
+        
     }
 }
