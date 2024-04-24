@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class Check_click : MonoBehaviour
 {
+    public AudioSource audioSourcePoint;
+
     public void OnClick()
     {
 
@@ -40,6 +42,7 @@ public class Check_click : MonoBehaviour
                 i.SetActive(false);                        
                     liy = false;
                     GetComponent<Image>().color = Color.green;
+                audioSourcePoint.Play();
                     StartCoroutine(ResetColorAfterDelay());
              }
              
