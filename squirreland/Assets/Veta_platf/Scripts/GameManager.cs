@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     private bool hasWon = false;
     private bool hasLost = false;
-  
+    [SerializeField] private AudioSource audioSourceFallPlayer;
 
     void Start()
     {
@@ -27,10 +27,16 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // Проверка условия проигрыша 1: игрок упал вниз
-        if (player.position.y < -200f && !hasLost)
+        if (player.position.y < -12f && !hasLost)
         {
-            hasLost = true;
-            ShowLoseMessage();
+
+            // Проигрываем звук падения игрока
+            audioSourceFallPlayer.Play();
+
+            // Вызываем функцию ShowLoseMessage с задержкой в 1 секунду
+            Invoke("ShowLoseMessage", 3f);
+
+            hasLost = true;// проиграл
         }
 
         // Проверка условия проигрыша 2: игрок выбрал на кнопке завершить игру

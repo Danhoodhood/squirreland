@@ -22,7 +22,12 @@ public class Player : Monser
     private SpriteRenderer sprite;
     public static Player Instance { get;  set; }//теперь можно обращаться к методам этого класса из других классов не создавая экземпляра этого класса в другом
     public Joystick joystick;
+    public AudioSource audioSourceJump;
+    public AudioSource audioSourceDamagePlayer;
+    //[SerializeField] private AudioSource audioSourceDamageMonster;
     
+
+
 
     private void Awake()
     {
@@ -45,8 +50,8 @@ public class Player : Monser
 
     public void Jump()
     {
-         //rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-        
+        //rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+                    audioSourceJump.Play();
         if (!isGrounded)
         {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.3f);
@@ -57,7 +62,9 @@ public class Player : Monser
                     // Проверяем, что игрок прыгает на врага
                     if (transform.position.y > collider.transform.position.y)
                     {
+                       
                        collider.GetComponent<Monser>().GetDamage();
+                       //audioSourceDamageMonster.Play();
                     }
                 }
             }
@@ -98,7 +105,7 @@ public class Player : Monser
         if (isGrounded &&  joystick.Vertical>=0.55f )//закоментить все условие при билде
         {
             Jump();
-            
+
         }
         
         
@@ -106,8 +113,11 @@ public class Player : Monser
     public override void GetDamage()
     {
         HeartSystem.health--;
+        
         lives  -= 1;
+
         Debug.Log(lives);
+        audioSourceDamagePlayer.Play();
     }
     private IEnumerator AttackCoolDown()
     {
@@ -126,9 +136,11 @@ public class Player : Monser
             Debug.Log("УДАР");
 
             Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPos.position, attackRange, enemy);
+            
 
             for (int i = 0; i < colliders.Length; i++)
             {
+
                 colliders[i].GetComponent<Monser>().GetDamage();
             }
         }

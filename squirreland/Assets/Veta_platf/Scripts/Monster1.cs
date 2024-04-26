@@ -6,8 +6,9 @@ using UnityEngine;
 public class Monster1 : Monser//червь
 
 {
-    
-    
+    //[SerializeField] private AudioSource audioSourceDieMonster;
+
+
     private void Start()
     {
         lives = 2;
@@ -25,9 +26,13 @@ public class Monster1 : Monser//червь
                 Debug.Log("Игрок прыгнул на монстра сверху, урон наносится монстру.");
                 lives--;
                 Debug.Log("У монстра " + lives + " жизней");
-
+                //
+;
                 if (lives < 1)
+                {
+                    //audioSourceDieMonster.Play();
                     Die();
+                }
             }
             else
             {
