@@ -27,18 +27,18 @@ public class MenuController : MonoBehaviour
     }
     public void open_sc_1()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("Platformer");
     }
     public void open_sc_2()
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene("Heart_bit");
     }
     public void open_sc_3()
     {
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene("search_acorns");
     }
     public void open_sc_4()
     {
-        SceneManager.LoadScene(6);
+        SceneManager.LoadScene("Game");
     }
 }

@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/main_menu.unity
     guid: 6f626799b44ddf349a35101aaa9cdbe5
   - enabled: 1
+    path: Assets/Veta_platf/Scenes/Platformer.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
     path: Assets/Veta_platf/Scenes/Platf_level1.unity
     guid: 68b8105e5254a3a47b003b3ecd3770fa
   - enabled: 1
