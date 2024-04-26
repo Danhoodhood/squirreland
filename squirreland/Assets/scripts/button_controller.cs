@@ -31,14 +31,14 @@ public class MenuController : MonoBehaviour
     }
     public void open_sc_2()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(4);
     }
     public void open_sc_3()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(5);
     }
     public void open_sc_4()
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(6);
     }
 }
