@@ -1134,7 +1134,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0.21499997, y: 0.35000002, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -1154,9 +1154,9 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
+      m_TileColorIndex: 2
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
@@ -1164,9 +1164,9 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
+      m_TileColorIndex: 2
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
@@ -1179,8 +1179,10 @@ Tilemap:
   - m_RefCount: 0
     m_Data: {fileID: 0}
   m_TileSpriteArray:
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 2
-    m_Data: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+    m_Data: {fileID: 21300000, guid: 793b378f187db3744b432a40d804b8a2, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 2
     m_Data:
@@ -1201,12 +1203,12 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 2
-    m_Data: {r: 0.2392157, g: 0.37254903, b: 0.21176472, a: 1}
+  - m_RefCount: 0
+    m_Data: {r: 7.0648e-41, g: 7.0648e-41, b: 7.0648e-41, a: 7.0648e-41}
   - m_RefCount: 0
     m_Data: {r: 6.4936e-41, g: 6.4936e-41, b: 6.4936e-41, a: 6.4936e-41}
-  - m_RefCount: 0
-    m_Data: {r: 3.6156e-41, g: 3.6156e-41, b: 3.6156e-41, a: 3.6156e-41}
+  - m_RefCount: 2
+    m_Data: {r: 0.9056604, g: 0.9056604, b: 0.9056604, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2034,6 +2036,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8139ae31d5f44644c9b80a1f239625b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSourceDamageMonster: {fileID: 0}
   speed: 3
   jumpForce: 13
   isGrounded: 0
@@ -2044,6 +2047,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   joystick: {fileID: 1984870158}
+  audioSourceJump: {fileID: 0}
+  audioSourceDamagePlayer: {fileID: 0}
 --- !u!50 &500054051
 Rigidbody2D:
   serializedVersion: 4
@@ -2126,7 +2131,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.5, y: -0.2, z: 66}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.7, y: 1.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 120525516}
@@ -4061,6 +4066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9924075782f7c547bb1db6b7bcbe4db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSourceDamageMonster: {fileID: 0}
 --- !u!1 &831085140
 GameObject:
   m_ObjectHideFlags: 0
@@ -4186,6 +4192,7 @@ MonoBehaviour:
   loseText: {fileID: 355277407}
   restartButton: {fileID: 115196555}
   LOAD: {fileID: 1427767716}
+  audioSourceFallPlayer: {fileID: 0}
 --- !u!1 &833542922
 GameObject:
   m_ObjectHideFlags: 0
@@ -6728,6 +6735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94c9525ac7a96f545b627a9505b3775e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSourceDamageMonster: {fileID: 0}
 --- !u!1 &1590068938
 GameObject:
   m_ObjectHideFlags: 0
@@ -8327,7 +8335,7 @@ Grid:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2067786658}
   m_Enabled: 1
-  m_CellSize: {x: 1, y: 1, z: 0}
+  m_CellSize: {x: 1.41, y: 1.55, z: 0}
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
