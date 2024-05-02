@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class musicvolume : MonoBehaviour
+public class soundvolume : MonoBehaviour
 {
     private AudioSource musicSource;
-    public float musicVolume = 1f;
+    public float musicVolume=1f;
     void Start()
     {
         musicSource = GetComponent<AudioSource>();
@@ -17,9 +16,9 @@ public class musicvolume : MonoBehaviour
     void Update()
     {
         
-        PlayerPrefs.SetFloat("musicvolume", musicVolume);
+        PlayerPrefs.SetFloat("soundvolume", musicVolume);
         PlayerPrefs.Save();
-        musicSource.volume = PlayerPrefs.GetFloat("musicvolume");
+        musicSource.volume = PlayerPrefs.GetFloat("soundvolume");
     }
     public void SetVolume(float volume)
     {
