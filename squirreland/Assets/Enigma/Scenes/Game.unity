@@ -923,7 +923,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 218155087}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1331,6 +1331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a08e9dea6ef7f904fbd62124e2d0d82b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicVolume: 1
 --- !u!1 &315400186
 GameObject:
   m_ObjectHideFlags: 0
@@ -2549,7 +2550,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 844, y: 446.85}
-  m_SizeDelta: {x: 49.8684, y: 34.2522}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1319578774
 MonoBehaviour:
@@ -2627,7 +2628,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 34fea040cfd506946b56f83459444768, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 32b7850d3102e76498906950b70a639b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3138,6 +3139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f841f73d7faddba4a9992b6a0feb963d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicVolume: 1
 --- !u!1 &1637982578
 GameObject:
   m_ObjectHideFlags: 0
@@ -3810,6 +3812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f841f73d7faddba4a9992b6a0feb963d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicVolume: 1
 --- !u!1 &1993631624
 GameObject:
   m_ObjectHideFlags: 0

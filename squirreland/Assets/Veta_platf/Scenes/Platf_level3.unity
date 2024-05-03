@@ -8041,6 +8041,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f841f73d7faddba4a9992b6a0feb963d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicVolume: 1
 --- !u!1 &903337478
 GameObject:
   m_ObjectHideFlags: 0
@@ -9177,6 +9178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a08e9dea6ef7f904fbd62124e2d0d82b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicVolume: 1
 --- !u!1001 &1142101808
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class ClickControl : MonoBehaviour
     public static int count;// количество желудей 
     public Text text;
     public AudioSource audioSource;
+    public GameObject pauseMenu;
 
     void Start()
     {
@@ -21,17 +22,21 @@ public class ClickControl : MonoBehaviour
 
     void OnMouseDown()//при клике
     {
-        obj_name = gameObject.name;
-        //Debug.Log(obj_name);
-
-        if (count < 4)//если количество желудей меньше 4х
+        if (!pauseMenu.activeSelf)
         {
-            audioSource.Play();//звук нажатия на желудь
-            Destroy(gameObject);//удаляется желудь
-            count++;
-            text.text = count.ToString();//вывод найденных желудей
+                obj_name = gameObject.name;
+            //Debug.Log(obj_name);
+
+            if (count < 4)//если количество желудей меньше 4х
+            {
+                audioSource.Play();//звук нажатия на желудь
+                Destroy(gameObject);//удаляется желудь
+                count++;
+                text.text = count.ToString();//вывод найденных желудей
             
+            }
         }
+
     }
 
 }
