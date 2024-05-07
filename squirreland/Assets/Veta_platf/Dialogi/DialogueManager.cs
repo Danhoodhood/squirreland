@@ -27,12 +27,12 @@ public class DialogueManager : MonoBehaviour
         startDialog.SetBool("StartDialog", false);
         sentences.Clear();
 
-        foreach(string sentence in dialogue.sentences)
-        {
-            sentences.Enqueue(sentence);
-        }
+       //     foreach(string sentence in dialogue.sentences)
+      //      {
+             //   sentences.Enqueue(sentence);
+       //     }
 
-        DisplayNextSentences();
+          //  DisplayNextSentences();
     }
 
     public void DisplayNextSentences()
