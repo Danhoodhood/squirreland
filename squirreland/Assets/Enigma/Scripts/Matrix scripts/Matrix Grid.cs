@@ -11,7 +11,7 @@ public class MatrixGrid
     public static int row = 10; 
     public static int column = 20;
     public static Transform[,] grid = new Transform[row, column];
-    public static AudioSource audioSourcePointRow;
+    //public static AudioSource audioSourcePointRow;
 
 
 
@@ -30,7 +30,7 @@ public class MatrixGrid
         {
             GameObject.Destroy(grid[x,y].gameObject);
             grid[x,y] = null;
-            audioSourcePointRow.Play();
+            //audioSourcePointRow.Play();
         }
 
 

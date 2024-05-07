@@ -5,6 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - turn
+  - right
+  - lose
+  - left
+  - res
+  - spawner
+  - point
+  - score
   layers:
   - Default
   - TransparentFX

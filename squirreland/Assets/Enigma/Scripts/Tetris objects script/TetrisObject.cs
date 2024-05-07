@@ -14,6 +14,7 @@ public class TetrisObject : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 2f;
         Button leftButton = GameObject.FindWithTag("left").GetComponent<Button>();
         Button rightButton = GameObject.FindWithTag("right").GetComponent<Button>();
         Button turnButton = GameObject.FindWithTag("turn").GetComponent<Button>();

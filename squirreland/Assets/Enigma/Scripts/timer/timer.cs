@@ -11,7 +11,6 @@ public class timer : MonoBehaviour
     public bool timerIsRunning = false;
     public TMP_Text timeText;
     [SerializeField]
-    private GameObject winpanel;
 
     private void Start()
     {
@@ -39,7 +38,7 @@ public class timer : MonoBehaviour
         else
         {
             Time.timeScale = 0f;
-            winpanel.SetActive(true);
+            SceneManager.LoadScene("Platformer");
 
         }
     }
