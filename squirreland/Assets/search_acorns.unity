@@ -404,19 +404,19 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 9c4f0b939113bc341931a8fe28c8a9d4, type: 3}
     - target: {fileID: 3298611482246102747, guid: 39935eca89a666b469d7fc0af6a7e33c, type: 3}
       propertyPath: m_Color.a
-      value: 1
+      value: 0.78431374
       objectReference: {fileID: 0}
     - target: {fileID: 3298611482246102747, guid: 39935eca89a666b469d7fc0af6a7e33c, type: 3}
       propertyPath: m_Color.b
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3298611482246102747, guid: 39935eca89a666b469d7fc0af6a7e33c, type: 3}
       propertyPath: m_Color.g
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3298611482246102747, guid: 39935eca89a666b469d7fc0af6a7e33c, type: 3}
       propertyPath: m_Color.r
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5367389134449252614, guid: 39935eca89a666b469d7fc0af6a7e33c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
