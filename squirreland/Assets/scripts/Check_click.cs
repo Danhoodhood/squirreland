@@ -16,7 +16,7 @@ public class Check_click : MonoBehaviour
         bool liy = true;
         if (dots is null)
         {
-            GetComponent<Image>().color = Color.red;
+            GetComponent<Image>().color = Color.black;
             StartCoroutine(ResetColorAfterDelay());
             GlobalScore.score--;
         }
@@ -41,7 +41,7 @@ public class Check_click : MonoBehaviour
                 GlobalScore.score++;
                 i.SetActive(false);                        
                     liy = false;
-                    GetComponent<Image>().color = Color.green;
+                    GetComponent<Image>().color = Color.yellow;
                 audioSourcePoint.Play();
                     StartCoroutine(ResetColorAfterDelay());
              }
@@ -50,7 +50,7 @@ public class Check_click : MonoBehaviour
         }
         if (liy)
         {
-                GetComponent<Image>().color = Color.red;
+                GetComponent<Image>().color = Color.black;
                 StartCoroutine(ResetColorAfterDelay());
                 GlobalScore.score--;
             
