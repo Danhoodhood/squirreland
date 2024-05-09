@@ -16,7 +16,8 @@ public class Player : Monser
     public float attackRange;//дальность атаки
     public LayerMask enemy;//
 
-
+    private float moveInput;//считывание движения
+    private bool factingRight = true;
     
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
@@ -25,9 +26,14 @@ public class Player : Monser
     public AudioSource audioSourceJump;
     public AudioSource audioSourceDamagePlayer;
     //[SerializeField] private AudioSource audioSourceDamageMonster;
-    
 
+    [SerializeField]private Animator anim;
 
+   /* private States State
+    {
+        get { return (States)anim.GetInteger("state"); }
+        set { anim.SetInteger("state", (int)value); }
+    }*/
 
     private void Awake()
     {
@@ -36,22 +42,26 @@ public class Player : Monser
         Instance = this;
         //isRecharged=true;
 
-
+        
         lives = 5;
     }
-
+    
     private void Run()
     {
+       // if (isGrounded) State = States.run;
+
         Vector3 dir = transform.right*joystick.Horizontal;
         transform.position = Vector3.MoveTowards(transform.position, transform.position + dir, speed*Time.deltaTime);
 
         sprite.flipX = dir.x < 0.0f;//  ПОВОРОТ ЛЕВО-ПРАВО если направление меньше нуля flipX = true и он поворачивается влево
     }
 
-    public void Jump()
+    public void Jump1()
     {
+
         //rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-                    audioSourceJump.Play();
+        audioSourceJump.Play();
+        anim.SetTrigger("jumpUp");
         if (!isGrounded)
         {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.3f);
@@ -69,13 +79,22 @@ public class Player : Monser
                 }
             }
         }
-        else
-        {
+        else  { 
+        
             rb.velocity = Vector2.up*jumpForce;
         }
     }
-
-
+    public void Jump()
+    {
+        if (isGrounded) { Jump1(); }
+    }
+    void Flip()
+    {
+        factingRight = !factingRight;
+        Vector3 Scaler = transform.localScale;
+        Scaler.x *=-1;
+        transform.localScale = Scaler;  
+    }
     private void CheckGround()
     {
         Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, 0.3f);
@@ -83,32 +102,68 @@ public class Player : Monser
 
         if (!isGrounded)
         {
-           
+           // State = States.jump;
         }
 
     }
     void Start()
     {
-        
+        //anim = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
     {
         CheckGround();
+        moveInput = Input.GetAxis("Horizontal");
+        if(factingRight == false && joystick.Horizontal >0)
+        {
+            Flip();
+        }
+        else if(factingRight == true && joystick.Horizontal < 0)
+        {
+            Flip();
+        }
     }
     void Update()
     {
+
+        /*if (moveInput== 0)
+        { anim.SetBool("isRunning", false);
+        }
+        else
+        {
+            anim.SetBool("isRunning", true);
+        }*/
+        if (isGrounded)
+        {
+            anim.SetBool("isJump", false);
+            anim.ResetTrigger("jumpUp");
+           
+        }
+        else
+        {
+            
+            anim.SetBool("isJump", true);
+            
+        }
+
         if (joystick.Horizontal !=0 && !isAttacking)
         {
             Run();
+            anim.SetBool("isRunning", true);
         }
-        if (isGrounded &&  joystick.Vertical>=0.55f )//закоментить все условие при билде
+        else
+        {
+            anim.SetBool("isRunning", false);
+        }
+        if (isGrounded &&  joystick.Vertical>=0.55f)//закоментить всё это! условие при билде(начало)
         {
             Jump();
+            //anim.SetTrigger("jumpUp");
 
-        }
-        
-        
+        }//(конец)
+
+
     }
     public override void GetDamage()
     {
@@ -168,7 +223,7 @@ public class Player : Monser
         }
 
     }
-
+    
     private void OnCollisionExit2D(Collision2D collision)//персонаж не двигается вместе с платформой
     {
         if (collision.gameObject.name.Equals("moving_platform"))
@@ -178,5 +233,12 @@ public class Player : Monser
 
     }
 
-
+    
 }
+/*public enum States
+{
+    idle,
+    run,
+    jump
+}
+*/
