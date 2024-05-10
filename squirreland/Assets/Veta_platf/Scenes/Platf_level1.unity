@@ -14240,7 +14240,7 @@ PrefabInstance:
       objectReference: {fileID: 1984870158}
     - target: {fileID: 3463869235064642248, guid: 6d0c65cbbdefa4644a5a3a1d9a6f7f63, type: 3}
       propertyPath: jumpForce
-      value: 16
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 3463869235064642248, guid: 6d0c65cbbdefa4644a5a3a1d9a6f7f63, type: 3}
       propertyPath: audioSourceDamagePlayer
@@ -14315,7 +14315,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 112c677f02e2d934c8dace8ec2a1c92a, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -14411,7 +14411,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 1984d84e8f412684eb416b1f54e788cb, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

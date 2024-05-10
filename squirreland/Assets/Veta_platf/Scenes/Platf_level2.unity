@@ -574,7 +574,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &120525516
 Transform:
   m_ObjectHideFlags: 0
@@ -4214,6 +4214,7 @@ GameObject:
   - component: {fileID: 500054056}
   - component: {fileID: 500054058}
   - component: {fileID: 500054057}
+  - component: {fileID: 500054059}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4235,7 +4236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSourceDamageMonster: {fileID: 500054058}
   speed: 3
-  jumpForce: 16
+  jumpForce: 17
   isGrounded: 0
   isAttacking: 0
   attackPos: {fileID: 1405058071}
@@ -4281,7 +4282,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 500054049}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -4478,7 +4479,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 1984d84e8f412684eb416b1f54e788cb, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -4574,7 +4575,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 112c677f02e2d934c8dace8ec2a1c92a, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -4659,6 +4660,82 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!60 &500054059
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500054049}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 3.1591182, y: 0.98156875}
+      - {x: 2.8239784, y: 1.1666505}
+      - {x: 2.5421844, y: 2.0481422}
+      - {x: 2.8839633, y: 2.0284305}
+      - {x: 3.9393623, y: 2.6199841}
+      - {x: 3.6609995, y: 3.0264723}
+      - {x: 3.2422476, y: 2.8575225}
+      - {x: 2.472947, y: 3.5442464}
+      - {x: 4.1359615, y: 4.597326}
+      - {x: 3.3969748, y: 5.082992}
+      - {x: 3.441153, y: 5.8197293}
+      - {x: 4.263704, y: 6.578575}
+      - {x: 4.1592155, y: 6.940307}
+      - {x: 3.1317306, y: 6.264504}
+      - {x: 1.4441273, y: 6.996873}
+      - {x: 1.6213514, y: 8.397416}
+      - {x: 1.0859852, y: 8.288917}
+      - {x: 0.50227, y: 6.6502624}
+      - {x: -0.9176558, y: 5.012111}
+      - {x: -2.1259847, y: 5.3533816}
+      - {x: -3.4838705, y: 4.848108}
+      - {x: -3.8744845, y: 3.436771}
+      - {x: -3.144609, y: 2.47701}
+      - {x: -2.2940612, y: 2.2564042}
+      - {x: -2.2386775, y: 1.6382864}
+      - {x: -1.4629487, y: 0.8331335}
+      - {x: -0.87505573, y: 0.61302054}
+      - {x: -0.48645073, y: 0.5083312}
+      - {x: 0.10644668, y: 0.1283266}
+      - {x: 1.4179955, y: 0.081000775}
+      - {x: 3.4084172, y: 0.2583498}
+  m_UseDelaunayMesh: 0
 --- !u!1 &514647232
 GameObject:
   m_ObjectHideFlags: 0
@@ -6739,7 +6816,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d327288c36ab62542b9d24e3557f9d16, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
