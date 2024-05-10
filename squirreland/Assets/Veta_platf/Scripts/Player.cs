@@ -8,6 +8,8 @@ public class Player : Monser
     
     [SerializeField] private float jumpForce = 15f;// сила прыжка
     [SerializeField] private bool isGrounded = false;
+    /*[Range(-5f, 5f)]public float checkGroundOffsetY = -1.8f;
+    [Range(0f, 5f)] public float  checkGroundRadius = 0.3f;*/
 
     [SerializeField]private bool isAttacking = false; // атакуем ли
     //[SerializeField] private bool isRecharged = false; // перезаредились ли
@@ -48,12 +50,14 @@ public class Player : Monser
     
     private void Run()
     {
-       // if (isGrounded) State = States.run;
+        // if (isGrounded) State = States.run;
 
         Vector3 dir = transform.right*joystick.Horizontal;
         transform.position = Vector3.MoveTowards(transform.position, transform.position + dir, speed*Time.deltaTime);
+        //GetComponent<Rigidbody2D>().AddForce(transform.right * speed * moveInput, ForceMode2D.Impulse);
 
         sprite.flipX = dir.x < 0.0f;//  ПОВОРОТ ЛЕВО-ПРАВО если направление меньше нуля flipX = true и он поворачивается влево
+        //rb.AddForce(transform.right * speed * moveInput, ForceMode2D.Impulse);
     }
 
     public void Jump1()
@@ -79,9 +83,10 @@ public class Player : Monser
                 }
             }
         }
-        else  { 
-        
+        else  {
+
             rb.velocity = Vector2.up*jumpForce;
+            
         }
     }
     public void Jump()
@@ -99,12 +104,20 @@ public class Player : Monser
     {
         Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, 0.3f);
         isGrounded = collider.Length > 1;
-
+        //new Vector2(transform.position.x, transform.position.y+checkGroundOffsetY), checkGroundRadius
+        /*if (collider.Length>1)
+        {
+            isGrounded = true;
+        }
+        else
+        {
+            isGrounded= false;
+        }
         if (!isGrounded)
         {
            // State = States.jump;
         }
-
+*/
     }
     void Start()
     {
