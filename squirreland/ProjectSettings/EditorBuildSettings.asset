@@ -15,11 +15,11 @@ EditorBuildSettings:
     path: Assets/Veta_platf/Scenes/Platf_level1.unity
     guid: 68b8105e5254a3a47b003b3ecd3770fa
   - enabled: 1
-    path: Assets/Veta_platf/Scenes/Platf_level2.unity
-    guid: 601be528d0435d84d90d74fd26e4986e
-  - enabled: 1
     path: Assets/Veta_platf/Scenes/Platf_level3.unity
     guid: 5f47afe2594b7a8409268d0fdcbabfe1
+  - enabled: 1
+    path: Assets/Veta_platf/Scenes/Platf_level4.unity
+    guid: 1860c7a0ce554b840bf62d6e7ba7d5b4
   - enabled: 1
     path: Assets/Scenes/Heart_bit.unity
     guid: 3fc8acdd13e6c734bafef6554d6fdbcd
