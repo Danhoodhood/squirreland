@@ -64,7 +64,7 @@ public class Player : Monser
     {
 
         //rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-        audioSourceJump.Play();
+        
         anim.SetTrigger("jumpUp");
         if (!isGrounded)
         {
@@ -86,7 +86,8 @@ public class Player : Monser
         else  {
 
             rb.velocity = Vector2.up*jumpForce;
-            
+            audioSourceJump.Play();
+
         }
     }
     public void Jump()

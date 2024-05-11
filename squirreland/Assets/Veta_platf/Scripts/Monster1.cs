@@ -7,7 +7,7 @@ public class Monster1 : Monser//червь
 
 {
     //[SerializeField] private AudioSource audioSourceDieMonster;
-
+    [SerializeField] private Animator anim;
 
     private void Start()
     {
@@ -38,8 +38,10 @@ public class Monster1 : Monser//червь
             {
                 // Игрок касается монстра сбоку или снизу, наносим урон
                 Player.Instance.GetDamage();
+                anim.SetBool("isAttacking", true);
                 Debug.Log("Игрок получил урон");
-               
+                anim.SetBool("isAttacking", false);
+
             }
         }
     }

@@ -13,6 +13,7 @@ public class Monster2 : Monser
     [SerializeField]private float minX;
     [SerializeField]private float maxX;
 
+    [SerializeField] private Animator anim;
     private void Start()
     {
         dir = transform.right;//начальное направление движения
@@ -29,7 +30,7 @@ public class Monster2 : Monser
     private void Move()
     {
         // Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position + transform.up*0.1f+ transform.right*dir.x*0.7f, 0.1f);
-
+        
         //if (colliders.Length> 1) dir*= -1f;
         if (transform.position.x < minX) dir = transform.right;
         else if (transform.position.x > maxX) dir = -transform.right;
@@ -67,7 +68,9 @@ public class Monster2 : Monser
             {
                 // Игрок касается монстра сбоку или снизу, урон не наносится игроку
                 Player.Instance.GetDamage();
+                anim.SetBool("isAttacking", true);
                 Debug.Log("Монстр касается игрока сбоку или снизу, но урон не наносится.");
+               // anim.SetBool("isAttacking", false);
             }
         }
     }
