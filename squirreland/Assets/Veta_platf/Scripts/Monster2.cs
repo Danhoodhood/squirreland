@@ -9,6 +9,10 @@ public class Monster2 : Monser
     private Vector3 dir;//направление движения
     private SpriteRenderer sprite;//спрайт(Sircle внутри монстра2)
 
+
+    [SerializeField]private float minX;
+    [SerializeField]private float maxX;
+
     private void Start()
     {
         dir = transform.right;//начальное направление движения
@@ -20,18 +24,27 @@ public class Monster2 : Monser
     {
         Move();
     }
+   
 
     private void Move()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position + transform.up*0.1f+ transform.right*dir.x*0.7f, 0.1f);
+        // Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position + transform.up*0.1f+ transform.right*dir.x*0.7f, 0.1f);
 
-        if (colliders.Length> 1) dir*= -1f;
+        //if (colliders.Length> 1) dir*= -1f;
+        if (transform.position.x < minX) dir = transform.right;
+        else if (transform.position.x > maxX) dir = -transform.right;
+
         transform.position =Vector3.MoveTowards(transform.position, transform.position+dir, Time.deltaTime);
         sprite.flipX = dir.x > 0.0f;
     }
     private void Awake()
     {
         sprite = GetComponentInChildren<SpriteRenderer>();
+    }
+    public override void GetDamage()
+    {
+        
+        lives  -= 1;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

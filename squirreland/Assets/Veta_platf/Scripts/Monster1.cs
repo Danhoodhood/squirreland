@@ -11,7 +11,7 @@ public class Monster1 : Monser//червь
 
     private void Start()
     {
-        lives = 2;
+        lives = 1;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {

@@ -169,12 +169,12 @@ public class Player : Monser
         {
             anim.SetBool("isRunning", false);
         }
-        if (isGrounded &&  joystick.Vertical>=0.55f)//закоментить всё это! условие при билде(начало)
+       /* if (isGrounded &&  joystick.Vertical>=0.55f)//закоментить всё это! условие при билде(начало)
         {
             Jump();
             //anim.SetTrigger("jumpUp");
 
-        }//(конец)
+        }//(конец)*/
 
 
     }

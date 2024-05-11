@@ -9136,6 +9136,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSourceDamageMonster: {fileID: 0}
+  minX: 0
+  maxX: 0
 --- !u!1 &831085140
 GameObject:
   m_ObjectHideFlags: 0
@@ -14196,11 +14198,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2998226299671097667, guid: 6d0c65cbbdefa4644a5a3a1d9a6f7f63, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 58.36
+      value: -12.9
       objectReference: {fileID: 0}
     - target: {fileID: 2998226299671097667, guid: 6d0c65cbbdefa4644a5a3a1d9a6f7f63, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.71
+      value: -2.1
       objectReference: {fileID: 0}
     - target: {fileID: 2998226299671097667, guid: 6d0c65cbbdefa4644a5a3a1d9a6f7f63, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14628,11 +14630,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8527182743137925631, guid: 8870ab770deea5f4e8c7183814732eed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 61.5
+      value: 127.3
       objectReference: {fileID: 0}
     - target: {fileID: 8527182743137925631, guid: 8870ab770deea5f4e8c7183814732eed, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: -4.4
       objectReference: {fileID: 0}
     - target: {fileID: 8527182743137925631, guid: 8870ab770deea5f4e8c7183814732eed, type: 3}
       propertyPath: m_LocalPosition.z
