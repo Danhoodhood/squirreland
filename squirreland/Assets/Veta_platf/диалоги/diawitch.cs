@@ -57,7 +57,7 @@ public class diawitch : MonoBehaviour
     }
     public void skip()
     {
-        if (EndDia != true)
+        if (EndDia != true && start== true)
         {
             count++;
             textDialog1.text = "";
@@ -65,37 +65,35 @@ public class diawitch : MonoBehaviour
             {
                 EndDia = true;
             }
-            else if (start==true)
+
+            if(count == 1) 
             {
-                if(count == 1) {
-                    gg.SetActive(true);
-                    barmen.SetActive(false);
-                    text = dialogi[count];
-                    StartCoroutine(TextCoroutine1());
-
-                    Invoke("dialogskip", 2);
-                }
-                if (count == 2)
-                {
-                    gg.SetActive(false);
-                    barmen.SetActive(true);
-                    text = dialogi[count];
-                    StartCoroutine(TextCoroutine1());
-
-                    Invoke("dialogskip",3);
-                }
-                if (count == 3)
-                {
-                    gg.SetActive(true);
-                    barmen.SetActive(false);
-                    text = dialogi[count];
-                    StartCoroutine(TextCoroutine1());
-
-                    Invoke("dialogskip", 3);
-                }
-
-
+                gg.SetActive(true);
+                barmen.SetActive(false);
+                text = dialogi[count];
+                StartCoroutine(TextCoroutine1());
+                Invoke("dialogskip", 4);
             }
+            if (count == 2)
+            {
+                
+                gg.SetActive(false);
+                barmen.SetActive(true);
+                text = dialogi[count];
+                StartCoroutine(TextCoroutine1());
+                Invoke("dialogskip",5.5f);
+            }
+            if (count == 3)
+            {
+                gg.SetActive(true);
+                barmen.SetActive(false);
+                text = dialogi[count];
+                StartCoroutine(TextCoroutine1());
+                Invoke("dialogskip", 6);
+            }
+
+
+            
 
 
 
@@ -132,7 +130,7 @@ public class diawitch : MonoBehaviour
             player.GetComponent<Player>().enabled = false;
             text = dialogi[0];
             StartCoroutine(TextCoroutine1());
-            Invoke("dialogskip", 2);
+            Invoke("dialogskip", 3);
 
 
 
