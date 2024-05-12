@@ -8,6 +8,7 @@ public class save : MonoBehaviour
     void Start()
     {
         Save_progress.Save();
+        Time.timeScale = 1;
     }
 
 }
