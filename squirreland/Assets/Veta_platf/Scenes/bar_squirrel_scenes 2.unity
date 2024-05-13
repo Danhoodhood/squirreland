@@ -206,7 +206,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 149550152}
-        m_TargetAssemblyTypeName: gameg1, Assembly-CSharp
+        m_TargetAssemblyTypeName: gameg, Assembly-CSharp
         m_MethodName: startgame
         m_Mode: 1
         m_Arguments:
@@ -734,10 +734,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 149550148}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31dc54cfba269a745af22284c8495599, type: 3}
+  m_Script: {fileID: 11500000, guid: f28aefcd3fab3a0458ea504d0a64a16a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   startbutton: {fileID: 40630960}
+  namelvl: Platf_level1
   endbutton: {fileID: 980762557}
 --- !u!1 &190173078
 GameObject:
@@ -1705,7 +1706,7 @@ Transform:
   m_GameObject: {fileID: 390143044}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.92, y: -3.36534, z: -26.4}
+  m_LocalPosition: {x: 16.919981, y: -3.36534, z: -26.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

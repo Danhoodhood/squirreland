@@ -677,6 +677,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startbutton: {fileID: 40630960}
+  namelvl: Search_acorns
   endbutton: {fileID: 980762557}
 --- !u!61 &149550150
 BoxCollider2D:
@@ -1704,7 +1705,7 @@ Transform:
   m_GameObject: {fileID: 390143044}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -27.860699, y: -3.36534, z: -26.4}
+  m_LocalPosition: {x: -28.971806, y: -3.36534, z: -26.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

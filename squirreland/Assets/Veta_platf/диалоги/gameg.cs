@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class gameg : MonoBehaviour
 {
     public GameObject startbutton;
+    public string namelvl;
     public bar2dialog endbutton;
     // Start is called before the first frame update
     void OnTriggerEnter2D(Collider2D col)
@@ -23,6 +24,6 @@ public class gameg : MonoBehaviour
     }
     public void startgame()
     {
-        SceneManager.LoadScene("search_acorns");
+        SceneManager.LoadScene(namelvl);
     }
 }
