@@ -12,6 +12,7 @@ public class SetActive : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 0f;
         a.SetActive(true); 
         b.SetActive(true);
         c.SetActive(true); 
