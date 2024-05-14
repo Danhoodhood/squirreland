@@ -15,9 +15,7 @@ public class diawitch2 : MonoBehaviour
     public GameObject music;
     public GameObject sound;
     public GameObject drink;
-    public GameObject glotok;
     public bool EndDia = false;
-    public bool start = false;
     public TextMeshProUGUI textDialog1;
     public TextMeshProUGUI textDialog2;
     private string text;
@@ -28,7 +26,24 @@ public class diawitch2 : MonoBehaviour
         };
 
 
+    void Start()
+    {
 
+        if (EndDia != true)
+        {
+
+            dial.SetActive(true);
+            player.GetComponent<Player>().enabled = false;
+            textDialog1.text = dialogi[0];
+
+
+
+
+
+
+
+        }
+    }
     void Update()
     {
         if (EndDia == true)
@@ -39,8 +54,7 @@ public class diawitch2 : MonoBehaviour
             sound.GetComponent<AudioSource>().Stop();
             text = "А ведь все могло закончиться по-плохому для Степаныча из-за лишнего бокальчика… надо ли оно вам?";
             StartCoroutine(TextCoroutine2());
-            Invoke("sceneloade", 4);
-            glotok.SetActive(true);
+            Invoke("sceneloade", 6);
             EndDia =false;
 
 
@@ -59,7 +73,7 @@ public class diawitch2 : MonoBehaviour
         {
             count++;
             textDialog1.text = "";
-            if (count == 4)
+            if (count == 2)
             {
                 EndDia = true;
             }
@@ -71,63 +85,23 @@ public class diawitch2 : MonoBehaviour
                 textDialog1.text = dialogi[count];
 
             }
-            if (count == 2)
-            {
-                
-                gg.SetActive(false);
-                barmen.SetActive(true);
-                textDialog1.text = dialogi[count];
- 
-            }
-            if (count == 3)
-            {
-                gg.SetActive(true);
-                barmen.SetActive(false);
-                textDialog1.text = dialogi[count];
 
-            }
+
 
 
             
 
 
 
-            start = false;
 
 
         }
 
     }
-    void OnTriggerEnter2D(Collider2D col)
+    
+  public void sceneloade()
     {
-        if (EndDia != true)
-        {
-            startbutton.SetActive(true);
-        }
-    }
-    void OnTriggerExit2D(Collider2D col)
-    {
-
-            startbutton.SetActive(false);
-
-    }
-    public void startdialog() 
-    {
-
-        if (EndDia != true)
-        {
-
-            dial.SetActive(true);
-            player.GetComponent<Player>().enabled = false;
-            textDialog1.text = dialogi[0];
-
-
-
-
-
-
-
-        }
+        SceneManager.LoadScene("main_menu");
     }
 
 

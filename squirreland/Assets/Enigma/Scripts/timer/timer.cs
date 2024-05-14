@@ -38,7 +38,7 @@ public class timer : MonoBehaviour
         else
         {
             Time.timeScale = 0f;
-            SceneManager.LoadScene("Platformer");
+            SceneManager.LoadScene("Stroyka_end");
 
         }
     }

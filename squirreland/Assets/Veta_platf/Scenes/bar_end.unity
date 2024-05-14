@@ -2899,9 +2899,7 @@ MonoBehaviour:
   music: {fileID: 370542931}
   sound: {fileID: 390143044}
   drink: {fileID: 1416228469}
-  glotok: {fileID: 0}
   EndDia: 0
-  start: 0
   textDialog1: {fileID: 1280973946}
   textDialog2: {fileID: 1287220177}
 --- !u!1 &804238154 stripped
@@ -4318,7 +4316,7 @@ MonoBehaviour:
   m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1301ce5851d09d0479c4db26decdc86b, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 775835468930191602, guid: 1301ce5851d09d0479c4db26decdc86b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

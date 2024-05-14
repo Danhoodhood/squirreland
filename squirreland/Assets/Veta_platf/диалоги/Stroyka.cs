@@ -9,7 +9,7 @@ public class Stroyka : MonoBehaviour
     public GameObject player;
     public GameObject startbutton;
     public GameObject gg;
-    public GameObject barmen;
+    public GameObject npc;
     public GameObject perexod;
     public bool EndDia = false;
     public bool start = false;
@@ -22,8 +22,8 @@ public class Stroyka : MonoBehaviour
         "Кенни:\nМы с тобой находимся на стройке нового ЖК Дубочки. Я могу помочь тебе, но перед этим ты должен помочь мне на стройке",
         "Степаныч:\n Ну а какие у меня варианты. что там делать надо?",
         "Кенни: \nСмотри, видишь тут стену ?",
-        "Степаныч:\nнет....",
-        "Степаныч:\nА она должна быть. Иди садись в кран, а там сам разберёшься."
+        "Степаныч:\nНет....",
+        "Кенни:\nА она должна быть. Иди садись в кран, а там сам разберёшься."
         };
 
 
@@ -49,30 +49,51 @@ public class Stroyka : MonoBehaviour
         {
             count++;
             textDialog3.text = "";
-            if (count == 4)
+            if (count == 7)
             {
                 EndDia = true;
             }
 
             if (count == 1)
             {
-                gg.SetActive(false);
-                barmen.SetActive(true);
+                gg.SetActive(true);
+                npc.SetActive(false);
                 textDialog3.text = dialogi[count];
 
             }
             if (count == 2)
             {
 
-                gg.SetActive(true);
-                barmen.SetActive(false);
+                gg.SetActive(false);
+                npc.SetActive(true);
                 textDialog3.text = dialogi[count];
 
             }
             if (count == 3)
             {
+                gg.SetActive(true);
+                npc.SetActive(false);
+                textDialog3.text = dialogi[count];
+
+            }
+            if (count == 4)
+            {
                 gg.SetActive(false);
-                barmen.SetActive(true);
+                npc.SetActive(true);
+                textDialog3.text = dialogi[count];
+
+            }
+            if (count == 5)
+            {
+                gg.SetActive(true);
+                npc.SetActive(false);
+                textDialog3.text = dialogi[count];
+
+            }
+            if (count == 6)
+            {
+                gg.SetActive(false);
+                npc.SetActive(true);
                 textDialog3.text = dialogi[count];
 
             }
