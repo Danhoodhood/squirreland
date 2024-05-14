@@ -57,7 +57,7 @@ public class diawitch : MonoBehaviour
     }
     public void skip()
     {
-        if (EndDia != true && start== true)
+        if (EndDia != true)
         {
             count++;
             textDialog1.text = "";
@@ -70,26 +70,23 @@ public class diawitch : MonoBehaviour
             {
                 gg.SetActive(true);
                 barmen.SetActive(false);
-                text = dialogi[count];
-                StartCoroutine(TextCoroutine1());
-                Invoke("dialogskip", 4);
+                textDialog1.text = dialogi[count];
+
             }
             if (count == 2)
             {
                 
                 gg.SetActive(false);
                 barmen.SetActive(true);
-                text = dialogi[count];
-                StartCoroutine(TextCoroutine1());
-                Invoke("dialogskip",5.5f);
+                textDialog1.text = dialogi[count];
+ 
             }
             if (count == 3)
             {
                 gg.SetActive(true);
                 barmen.SetActive(false);
-                text = dialogi[count];
-                StartCoroutine(TextCoroutine1());
-                Invoke("dialogskip", 6);
+                textDialog1.text = dialogi[count];
+
             }
 
 
@@ -128,9 +125,8 @@ public class diawitch : MonoBehaviour
 
             dial.SetActive(true);
             player.GetComponent<Player>().enabled = false;
-            text = dialogi[0];
-            StartCoroutine(TextCoroutine1());
-            Invoke("dialogskip", 3);
+            textDialog1.text = dialogi[0];
+
 
 
 
@@ -139,22 +135,10 @@ public class diawitch : MonoBehaviour
 
         }
     }
-    void dialogskip()
-    {
-        start = true;
 
 
-    }
 
 
-    IEnumerator TextCoroutine1()
-    {
-        foreach (char abc in text)
-        {
-            textDialog1.text += abc;
-            yield return new WaitForSeconds(0.05f);
-        }
-    }
     IEnumerator TextCoroutine2()
     {
         foreach (char abc in text)
