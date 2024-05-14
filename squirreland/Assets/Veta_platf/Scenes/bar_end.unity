@@ -2888,7 +2888,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 688429016}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c97d898bdd7ba914a931b5bdf0a587f0, type: 3}
+  m_Script: {fileID: 11500000, guid: c97c894d0e199884fb44ce2c4dae6328, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dial: {fileID: 804238154}
@@ -3252,13 +3252,13 @@ PrefabInstance:
       addedObject: {fileID: 688429018}
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: b8df1e7f6a45d034db5b8a42d3c6896a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 688429023}
-    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: b8df1e7f6a45d034db5b8a42d3c6896a, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 688429022}
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: b8df1e7f6a45d034db5b8a42d3c6896a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 688429021}
+    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: b8df1e7f6a45d034db5b8a42d3c6896a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 688429023}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: b8df1e7f6a45d034db5b8a42d3c6896a, type: 3}
 --- !u!1 &935380897
 GameObject:
@@ -4584,7 +4584,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 688429023}
-        m_TargetAssemblyTypeName: diawitch, Assembly-CSharp
+        m_TargetAssemblyTypeName: diawitch2, Assembly-CSharp
         m_MethodName: startdialog
         m_Mode: 1
         m_Arguments:
@@ -6366,6 +6366,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 688429023}
+    - target: {fileID: 7479161535723293836, guid: 6e4b046ee8513a8459b41365237c7438, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: skip
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479161535723293836, guid: 6e4b046ee8513a8459b41365237c7438, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: diawitch2, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 7950669537011066674, guid: 6e4b046ee8513a8459b41365237c7438, type: 3}
       propertyPath: m_fontColor.b
       value: 0
