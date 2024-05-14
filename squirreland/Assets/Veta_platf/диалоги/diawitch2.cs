@@ -52,7 +52,7 @@ public class diawitch2 : MonoBehaviour
             drink.SetActive(true);
             music.SetActive(false);
             sound.GetComponent<AudioSource>().Stop();
-            text = "А ведь все могло закончиться по-плохому для Степаныча из-за лишнего бокальчика… надо ли оно вам?";
+            text = "А ведь все могло закончиться по-плохому для Степаныча из-за лишнего бокальчика… надо ли оно вам? Конец игры";
             StartCoroutine(TextCoroutine2());
             Invoke("sceneloade", 6);
             EndDia =false;
