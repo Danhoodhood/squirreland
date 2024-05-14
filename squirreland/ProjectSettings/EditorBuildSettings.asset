@@ -32,6 +32,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Veta_platf/Scenes/bar_squirrel_scenes 2.unity
     guid: 63f32aeef2bf40a469f40916c0084ebf
+  - enabled: 1
+    path: Assets/Veta_platf/Scenes/laba.unity
+    guid: 6e7afe4e9f897cb4c93853e0b8396f31
+  - enabled: 1
+    path: Assets/Veta_platf/Scenes/bar_squirrel_scenes 1.unity
+    guid: f05e87a1d3727694dbfab43a99a7ff02
+  - enabled: 1
+    path: Assets/Veta_platf/Scenes/bar_scense_1.unity
+    guid: c5f11b51f09364340ba7cbc3707d9a1a
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 3f540cbdbfa214946aeca32d4e6c1aa9, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 1df525cea2f57b140bbbff02c2c8203a, type: 2}
