@@ -8,6 +8,7 @@ public class SetActive : MonoBehaviour
     public GameObject b;
     public GameObject c;
     public GameObject d;
+    public GameObject e;
 
 
     void Start()
@@ -17,5 +18,6 @@ public class SetActive : MonoBehaviour
         b.SetActive(true);
         c.SetActive(true); 
         d.SetActive(true);
+        e.SetActive(true);
     }
 }

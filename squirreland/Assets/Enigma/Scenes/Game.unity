@@ -2459,6 +2459,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1218815897}
   m_CullTransparentMesh: 1
+--- !u!1 &1247025658 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8498208245365177226, guid: efc48c9c90802a54fb30e0b745868cd8, type: 3}
+  m_PrefabInstance: {fileID: 1585167493}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1319578772
 GameObject:
   m_ObjectHideFlags: 0
@@ -2624,6 +2629,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7054602351193029310, guid: efc48c9c90802a54fb30e0b745868cd8, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7889374465702687672, guid: efc48c9c90802a54fb30e0b745868cd8, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7889374465702687672, guid: efc48c9c90802a54fb30e0b745868cd8, type: 3}
+      propertyPath: m_Color.b
+      value: 0.16981131
+      objectReference: {fileID: 0}
+    - target: {fileID: 7889374465702687672, guid: efc48c9c90802a54fb30e0b745868cd8, type: 3}
+      propertyPath: m_Color.g
+      value: 0.16981131
+      objectReference: {fileID: 0}
+    - target: {fileID: 7889374465702687672, guid: efc48c9c90802a54fb30e0b745868cd8, type: 3}
+      propertyPath: m_Color.r
+      value: 0.16981131
+      objectReference: {fileID: 0}
     - target: {fileID: 7906283365336517871, guid: efc48c9c90802a54fb30e0b745868cd8, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2708,6 +2733,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8498208245365177226, guid: efc48c9c90802a54fb30e0b745868cd8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2757,6 +2786,7 @@ MonoBehaviour:
   b: {fileID: 1585167497}
   c: {fileID: 1585167496}
   d: {fileID: 1585167495}
+  e: {fileID: 1247025658}
 --- !u!1001 &1612813734
 PrefabInstance:
   m_ObjectHideFlags: 0
