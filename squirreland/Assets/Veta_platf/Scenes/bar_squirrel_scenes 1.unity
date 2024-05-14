@@ -663,7 +663,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &149550149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -678,7 +678,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startbutton: {fileID: 40630960}
   namelvl: Search_acorns
-  endbutton: {fileID: 980762557}
 --- !u!61 &149550150
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3365,6 +3364,7 @@ MonoBehaviour:
   startbutton: {fileID: 1556399628}
   gg: {fileID: 1519925375}
   barmen: {fileID: 1519925374}
+  perexod: {fileID: 149550148}
   EndDia: 0
   start: 0
   textDialog1: {fileID: 1519925373}

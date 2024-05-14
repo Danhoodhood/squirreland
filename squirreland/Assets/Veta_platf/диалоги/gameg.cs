@@ -7,14 +7,13 @@ public class gameg : MonoBehaviour
 {
     public GameObject startbutton;
     public string namelvl;
-    public bar2dialog endbutton;
+
     // Start is called before the first frame update
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (endbutton.EndDia == true)
-        {
+
             startbutton.SetActive(true);
-        }
+
     }
     void OnTriggerExit2D(Collider2D col)
     {

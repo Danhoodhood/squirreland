@@ -11,6 +11,7 @@ public class bar2dialog : MonoBehaviour
     public GameObject startbutton;
     public GameObject gg;
     public GameObject barmen;
+    public GameObject perexod;
     public bool EndDia = false;
     public bool start = false;
     public TextMeshProUGUI textDialog1;
@@ -32,6 +33,7 @@ public class bar2dialog : MonoBehaviour
             dial.SetActive(false);
             startbutton.SetActive(false);
             player.GetComponent<Player>().enabled = true;
+            perexod.SetActive(true);
 
 
 
@@ -45,7 +47,7 @@ public class bar2dialog : MonoBehaviour
     }
     public void skip()
     {
-        if (EndDia != true && start == true)
+        if (EndDia != true )
         {
             count++;
             textDialog1.text = "";
@@ -56,28 +58,25 @@ public class bar2dialog : MonoBehaviour
 
             if (count == 1)
             {
-                gg.SetActive(true);
-                barmen.SetActive(false);
-                text = dialogi[count];
-                StartCoroutine(TextCoroutine1());
-                Invoke("dialogskip", 5);
+                gg.SetActive(false);
+                barmen.SetActive(true);
+                textDialog1.text = dialogi[count];
+      
             }
             if (count == 2)
             {
 
-                gg.SetActive(false);
-                barmen.SetActive(true);
-                text = dialogi[count];
-                StartCoroutine(TextCoroutine1());
-                Invoke("dialogskip", 5);
+                gg.SetActive(true);
+                barmen.SetActive(false);
+                textDialog1.text = dialogi[count];
+
             }
             if (count == 3)
             {
-                gg.SetActive(true);
-                barmen.SetActive(false);
-                text = dialogi[count];
-                StartCoroutine(TextCoroutine1());
-                Invoke("dialogskip", 4);
+                gg.SetActive(false);
+                barmen.SetActive(true);
+                textDialog1.text = dialogi[count];
+
             }
 
 
@@ -91,10 +90,7 @@ public class bar2dialog : MonoBehaviour
         }
 
     }
-    void sceneloade()
-    {
-        SceneManager.LoadScene("Heart_bit");
-    }
+
     void OnTriggerEnter2D(Collider2D col)
     {
         if (EndDia != true)
@@ -116,9 +112,8 @@ public class bar2dialog : MonoBehaviour
 
             dial.SetActive(true);
             player.GetComponent<Player>().enabled = false;
-            text = dialogi[0];
-            StartCoroutine(TextCoroutine1());
-            Invoke("dialogskip", 4);
+            textDialog1.text = dialogi[0];
+
 
 
 
@@ -127,21 +122,8 @@ public class bar2dialog : MonoBehaviour
 
         }
     }
-    void dialogskip()
-    {
-        start = true;
 
 
-    }
 
-
-    IEnumerator TextCoroutine1()
-    {
-        foreach (char abc in text)
-        {
-            textDialog1.text += abc;
-            yield return new WaitForSeconds(0.05f);
-        }
-    }
 
 }
