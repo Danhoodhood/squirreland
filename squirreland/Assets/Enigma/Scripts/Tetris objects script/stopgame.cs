@@ -15,9 +15,11 @@ public class stopgame : MonoBehaviour
         {
             GameObject spawner = GameObject.FindGameObjectWithTag("spawner");
             Destroy(spawner);
-            SceneManager.LoadScene("Game");
+            //SceneManager.LoadScene("Game");
+            GameObject defeat = GameObject.FindGameObjectWithTag("defeat");
+            defeat.GetComponent<SetActive>().enabled=true;
 
-
+        
 
 
         }
