@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startbutton: {fileID: 1456366384}
-  namelvl: Bar_scense_1
+  namelvl: bar_end
 --- !u!61 &42671509
 BoxCollider2D:
   m_ObjectHideFlags: 0
