@@ -52,9 +52,11 @@ public class diawitch2 : MonoBehaviour
             drink.SetActive(true);
             music.SetActive(false);
             sound.GetComponent<AudioSource>().Stop();
-            text = "А ведь все могло закончиться по-плохому для Степаныча из-за лишнего бокальчика… надо ли оно вам? Конец игры";
+            text = "А ведь все могло закончиться по-плохому для Степаныча из-за лишнего бокальчика… надо ли оно вам?";
             StartCoroutine(TextCoroutine2());
-            Invoke("sceneloade", 6);
+            Invoke("lastwords", 6);
+            textDialog1.text = "";
+            Invoke("sceneloade", 18);
             EndDia =false;
 
 
@@ -66,6 +68,19 @@ public class diawitch2 : MonoBehaviour
         
 
 
+    }
+    public void lastwords()
+    {
+        textDialog1.text = "";
+        text = "Над игрой работали студенты ДГТУ МКИС23:\nАсрян Д. А.,\n Некрасов Я. А., \n Голощук С. ., \n Джгереная А. В.";
+        StartCoroutine(TextCoroutine2());
+        Invoke("lastwords2", 6);
+    }
+    public void lastwords2()
+    {
+        textDialog1.text = "";
+        text = "Спасибо, что прошли нашу игру!";
+        StartCoroutine(TextCoroutine2());
     }
     public void skip()
     {
