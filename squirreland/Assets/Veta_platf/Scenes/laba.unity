@@ -1201,7 +1201,7 @@ Transform:
   m_GameObject: {fileID: 390143044}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -30.866352, y: -3.3887, z: -26.4}
+  m_LocalPosition: {x: -29.755238, y: -3.3887, z: -26.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1980,7 +1980,7 @@ PrefabInstance:
     - target: {fileID: 7950669537011066674, guid: 6e4b046ee8513a8459b41365237c7438, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 1301ce5851d09d0479c4db26decdc86b, type: 2}
+      objectReference: {fileID: 11400000, guid: a037b06596595af4bacd3f6dca975fb8, type: 2}
     - target: {fileID: 7950669537011066674, guid: 6e4b046ee8513a8459b41365237c7438, type: 3}
       propertyPath: m_fontColor.b
       value: 0
