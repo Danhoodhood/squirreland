@@ -13,7 +13,7 @@ public class MenuController : MonoBehaviour
 
     public void newgame()
     {
-        SceneManager.LoadScene(11);
+        SceneManager.LoadScene("bar_scense_1");
     }
     public void OpenLevelsMenu()
     {
@@ -27,7 +27,7 @@ public class MenuController : MonoBehaviour
     }
     public void open_sc_1()
     {
-        SceneManager.LoadScene("Platformer");
+        SceneManager.LoadScene("Platf_level1");
     }
     public void open_sc_2()
     {

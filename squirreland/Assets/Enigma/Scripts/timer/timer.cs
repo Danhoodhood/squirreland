@@ -33,6 +33,7 @@ public class timer : MonoBehaviour
                 Debug.Log("Time has run out!");
                 timeRemaining = 0;
                 timerIsRunning = false;
+                SceneManager.LoadScene("Stroyka_end");
             }
         }
         else
