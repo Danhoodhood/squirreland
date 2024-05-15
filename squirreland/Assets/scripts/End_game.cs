@@ -16,6 +16,7 @@ public class End_game : MonoBehaviour
     public Color maxColor;
     public GameObject button_continue;
     public GameObject menu;
+    public GameObject defeat;
     public int sceneIndex;
     // Start is called before the first frame update
     void Start()
@@ -33,9 +34,7 @@ public class End_game : MonoBehaviour
         Time.timeScale = 0f; // Остановка времени
         if (GlobalScore.score<=minValue)
         {
-            score_text.color = minColor;
-            vin_lose.color = minColor;
-            vin_lose.text = "Вы проиграли!(";
+            defeat.SetActive(true);
 
         }
         else

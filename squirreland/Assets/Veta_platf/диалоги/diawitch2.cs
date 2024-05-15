@@ -55,7 +55,7 @@ public class diawitch2 : MonoBehaviour
             text = "А ведь все могло закончиться по-плохому для Степаныча из-за лишнего бокальчика… надо ли оно вам?";
             StartCoroutine(TextCoroutine2());
             Invoke("lastwords", 6);
-            Invoke("sceneloade", 18);
+            Invoke("sceneloade", 20);
             EndDia =false;
 
 
@@ -71,9 +71,9 @@ public class diawitch2 : MonoBehaviour
     public void lastwords()
     {
         textDialog2.text = "";
-        text = "Над игрой работали студенты ДГТУ МКИС23:\nАсрян Д. А.,\n Некрасов Я. А., \n Голощук С. ., \n Джгереная А. В.";
+        text = "Над игрой работали студенты ДГТУ МКИС23:\nАсрян Д. А.,\n Некрасов Я. А., \n Голощук С. С., \n Джгереная А. В.";
         StartCoroutine(TextCoroutine2());
-        Invoke("lastwords2", 6);
+        Invoke("lastwords2", 8);
     }
     public void lastwords2()
     {
