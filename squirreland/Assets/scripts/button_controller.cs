@@ -8,7 +8,16 @@ public class MenuController : MonoBehaviour
 
     public void OpenLastLevel()
     {
-        SceneManager.LoadScene(PlayerPrefs.GetInt("Last_lvl"));
+        if (PlayerPrefs.HasKey("Last_lvl"))
+        {
+            SceneManager.LoadScene(PlayerPrefs.GetInt("Last_lvl"));
+        }
+        else
+        {
+            SceneManager.LoadScene("bar_scense_1");
+            //или какая там
+        }
+
     }
 
     public void newgame()
