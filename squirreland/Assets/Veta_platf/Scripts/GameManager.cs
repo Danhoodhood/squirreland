@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
             Invoke("ShowLoseMessage", 3f);
 
             hasLost = true;// проиграл
+            HeartSystem.health = 0;
         }
 
         // ѕроверка услови€ проигрыша 2: игрок выбрал на кнопке завершить игру
