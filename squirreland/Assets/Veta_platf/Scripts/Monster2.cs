@@ -66,10 +66,11 @@ public class Monster2 : Monser
             }
             else
             {
-                // Игрок касается монстра сбоку или снизу, урон не наносится игроку
+                // Игрок касается монстра сбоку или снизу, урон наносится игроку
                 Player.Instance.GetDamage();
-                anim.SetBool("isAttacking", true);
-                Debug.Log("Монстр касается игрока сбоку или снизу, но урон не наносится.");
+                anim.SetTrigger("isAttacking1");
+                //anim.SetBool("isAttacking", true);
+                Debug.Log("Монстр касается игрока сбоку или снизу,  урон  наносится.");
                // anim.SetBool("isAttacking", false);
             }
         }

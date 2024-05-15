@@ -141,6 +141,11 @@ public class Player : Monser
     void Update()
     {
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Jump();
+        }
+
         /*if (moveInput== 0)
         { anim.SetBool("isRunning", false);
         }
