@@ -13,7 +13,7 @@ public class MenuController : MonoBehaviour
 
     public void newgame()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(11);
     }
     public void OpenLevelsMenu()
     {
