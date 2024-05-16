@@ -1147,6 +1147,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: run
       objectReference: {fileID: 0}
+    - target: {fileID: -8653719598885068355, guid: 3754b4a77d1e73945806d31aabdab19f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 3754b4a77d1e73945806d31aabdab19f, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.58
@@ -7017,7 +7021,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -812.99994, y: 28.690002}
+  m_AnchoredPosition: {x: -813, y: 28.690002}
   m_SizeDelta: {x: 1836.9, y: 190.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &494714760
@@ -14639,11 +14643,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2998226299671097667, guid: 6d0c65cbbdefa4644a5a3a1d9a6f7f63, type: 3}
       propertyPath: m_LocalPosition.x
+<<<<<<< Updated upstream
       value: -14.8
       objectReference: {fileID: 0}
     - target: {fileID: 2998226299671097667, guid: 6d0c65cbbdefa4644a5a3a1d9a6f7f63, type: 3}
       propertyPath: m_LocalPosition.y
       value: -4.74
+=======
+      value: -7.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 2998226299671097667, guid: 6d0c65cbbdefa4644a5a3a1d9a6f7f63, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.64
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 2998226299671097667, guid: 6d0c65cbbdefa4644a5a3a1d9a6f7f63, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14721,6 +14733,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5752115676861206222, guid: 6d0c65cbbdefa4644a5a3a1d9a6f7f63, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5752115676861206222, guid: 6d0c65cbbdefa4644a5a3a1d9a6f7f63, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: c2bd5464b54ba1f41b914fc0abb47d0b, type: 2}
     - target: {fileID: 7368565918701369169, guid: 6d0c65cbbdefa4644a5a3a1d9a6f7f63, type: 3}
       propertyPath: m_IsActive
       value: 0

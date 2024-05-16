@@ -60,12 +60,14 @@ public class Player : Monser
         //rb.AddForce(transform.right * speed * moveInput, ForceMode2D.Impulse);
     }
 
-    public void Jump1()
+    public void Jump()
     {
 
         //rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-        
+
+
         anim.SetTrigger("jumpUp");
+
         if (!isGrounded)
         {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.3f);
@@ -76,24 +78,40 @@ public class Player : Monser
                     // Проверяем, что игрок прыгает на врага
                     if (transform.position.y > collider.transform.position.y)
                     {
-                       
-                       collider.GetComponent<Monser>().GetDamage();
-                       //audioSourceDamageMonster.Play();
+
+                        collider.GetComponent<Monser>().GetDamage();
+                        //audioSourceDamageMonster.Play();
                     }
                 }
             }
-        }
-        else  {
 
+        }
+        else {
             rb.velocity = Vector2.up*jumpForce;
             audioSourceJump.Play();
 
         }
+
+
+
+
+
+
+
     }
-    public void Jump()
-    {
-        if (isGrounded) { Jump1(); }
+
+    public void Jump11() {
+
+
+        
+        Invoke("Jump1", 0.5f);
+
+        //Jump1();
+        
+    
+        
     }
+ 
     void Flip()
     {
         factingRight = !factingRight;
@@ -127,7 +145,14 @@ public class Player : Monser
 
     private void FixedUpdate()
     {
+        
+
+
         CheckGround();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Jump();
+        }
         moveInput = Input.GetAxis("Horizontal");
         if(factingRight == false && joystick.Horizontal >0)
         {
@@ -141,22 +166,19 @@ public class Player : Monser
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Jump();
-        }
+       
 
-        /*if (moveInput== 0)
+        if (moveInput== 0)
         { anim.SetBool("isRunning", false);
         }
         else
         {
             anim.SetBool("isRunning", true);
-        }*/
+        }
         if (isGrounded)
         {
             anim.SetBool("isJump", false);
-            anim.ResetTrigger("jumpUp");
+            //anim.ResetTrigger("jumpUp");
            
         }
         else
