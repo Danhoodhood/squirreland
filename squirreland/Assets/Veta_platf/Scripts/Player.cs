@@ -156,7 +156,7 @@ public class Player : Monser
         if (isGrounded)
         {
             anim.SetBool("isJump", false);
-            anim.ResetTrigger("jumpUp");
+           // anim.ResetTrigger("jumpUp");
            
         }
         else
