@@ -54,7 +54,7 @@ public class diawitch2 : MonoBehaviour
             sound.GetComponent<AudioSource>().Stop();
             text = "А ведь все могло закончиться по-плохому для Степаныча из-за лишнего бокальчика… надо ли оно вам?";
             StartCoroutine(TextCoroutine2());
-            Invoke("lastwords", 6);
+            Invoke("lastwords", 7);
             Invoke("sceneloade", 20);
             EndDia =false;
 
