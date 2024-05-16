@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour
             audioSourceFallPlayer.Play();
 
             // Вызываем функцию ShowLoseMessage с задержкой в 1 секунду
-            Invoke("ShowLoseMessage", 3f);
 
             hasLost = true;// проиграл
             HeartSystem.health = 0;

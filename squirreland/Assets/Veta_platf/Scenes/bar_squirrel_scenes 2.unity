@@ -738,7 +738,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startbutton: {fileID: 40630960}
-  namelvl: Platf_level1
+  namelvl: Platf_level3
 --- !u!1 &190173078
 GameObject:
   m_ObjectHideFlags: 0
@@ -5900,7 +5900,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSourceDamageMonster: {fileID: 0}
-  speed: 2
+  speed: 3
   jumpForce: 17
   isGrounded: 0
   isAttacking: 0
