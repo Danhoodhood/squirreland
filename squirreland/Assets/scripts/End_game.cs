@@ -39,7 +39,7 @@ public class End_game : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene("Platf_Level_1");
+            SceneManager.LoadScene("Platf_Level1");
         }
         
 

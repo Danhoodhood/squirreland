@@ -14459,7 +14459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1308661608919093911, guid: 6d0c65cbbdefa4644a5a3a1d9a6f7f63, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1308661608919093911, guid: 6d0c65cbbdefa4644a5a3a1d9a6f7f63, type: 3}
       propertyPath: m_Offset.x
@@ -14915,7 +14915,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4271833990376279491}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
