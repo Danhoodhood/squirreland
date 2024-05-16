@@ -1756,14 +1756,16 @@ MonoBehaviour:
   - 2
   - 2
   - 2
-  - 4
+  - 2
+  - 3
   speed:
+  - 15
+  - 25
+  - 45
+  - 25
   - 20
-  - 40
-  - 60
-  - 30
-  - 20
-  - 60
+  - 50
+  - 45
   varriable_speed: 20
 --- !u!114 &595618155
 MonoBehaviour:
@@ -2611,14 +2613,16 @@ MonoBehaviour:
   - 2
   - 5
   - 5
+  - 2
   speed:
-  - 60
+  - 35
   - 20
   - 30
-  - 20
-  - 60
   - 10
-  - 50
+  - 45
+  - 10
+  - 40
+  - 25
   varriable_speed: 20
 --- !u!114 &867676778
 MonoBehaviour:
@@ -3872,14 +3876,16 @@ MonoBehaviour:
   - 3
   - 4
   - 3
+  - 1
   speed:
-  - 20
-  - 50
-  - 40
-  - 40
-  - 20
   - 30
+  - 5
   - 30
+  - 25
+  - 15
+  - 25
+  - 30
+  - 45
   varriable_speed: 20
 --- !u!114 &1259027905
 MonoBehaviour:
