@@ -39,10 +39,7 @@ public class End_game : MonoBehaviour
         }
         else
         {
-            score_text.color = maxColor;
-            vin_lose.color = maxColor;
-            vin_lose.text = "Вы победили!:D";
-            button_continue.SetActive(true);
+            SceneManager.LoadScene("Platf_Level_1");
         }
         
 
