@@ -6,20 +6,27 @@ using UnityEngine.SceneManagement;
 public class musicvolume : MonoBehaviour
 {
     private AudioSource musicSource;
-    public float musicVolume = 1f;
+    private float musicVolume;
     void Start()
     {
         musicSource = GetComponent<AudioSource>();
-        
+        if (PlayerPrefs.HasKey("musicvolume"))
+        {
+            musicSource.volume = PlayerPrefs.GetFloat("musicvolume");
+        }
+        else
+        {
+            musicSource.volume = 1f;
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        musicSource.volume = musicVolume;
         PlayerPrefs.SetFloat("musicvolume", musicVolume);
         PlayerPrefs.Save();
-        musicSource.volume = PlayerPrefs.GetFloat("musicvolume");
     }
     public void SetVolume(float volume)
     {

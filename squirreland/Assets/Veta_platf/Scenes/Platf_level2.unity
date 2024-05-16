@@ -11646,6 +11646,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2166243970480111729, guid: 6c3b7b2ca20ecf9428d9f0d19b3aef08, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2223609800884830372, guid: 6c3b7b2ca20ecf9428d9f0d19b3aef08, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -13634,6 +13638,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1679735168537580200, guid: 39935eca89a666b469d7fc0af6a7e33c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1333054803}
+    - target: {fileID: 1679735168537580200, guid: 39935eca89a666b469d7fc0af6a7e33c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Quite
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679735168537580200, guid: 39935eca89a666b469d7fc0af6a7e33c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Gamemenu, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 3296572691732871958, guid: 39935eca89a666b469d7fc0af6a7e33c, type: 3}
       propertyPath: m_SortingOrder
       value: 4
@@ -13749,6 +13765,14 @@ PrefabInstance:
     - target: {fileID: 6527170178422413554, guid: 39935eca89a666b469d7fc0af6a7e33c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8979539723344474813, guid: 39935eca89a666b469d7fc0af6a7e33c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1757853982}
+    - target: {fileID: 8979539723344474813, guid: 39935eca89a666b469d7fc0af6a7e33c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 9055900002505016361, guid: 39935eca89a666b469d7fc0af6a7e33c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -15237,12 +15261,16 @@ PrefabInstance:
       value: SquareWIN
       objectReference: {fileID: 0}
     - target: {fileID: 8527182743137925631, guid: 8870ab770deea5f4e8c7183814732eed, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.4188
+      objectReference: {fileID: 0}
+    - target: {fileID: 8527182743137925631, guid: 8870ab770deea5f4e8c7183814732eed, type: 3}
       propertyPath: m_LocalScale.y
       value: 5.925
       objectReference: {fileID: 0}
     - target: {fileID: 8527182743137925631, guid: 8870ab770deea5f4e8c7183814732eed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 150.99
+      value: 150.7806
       objectReference: {fileID: 0}
     - target: {fileID: 8527182743137925631, guid: 8870ab770deea5f4e8c7183814732eed, type: 3}
       propertyPath: m_LocalPosition.y
