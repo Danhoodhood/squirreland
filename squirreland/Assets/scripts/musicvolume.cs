@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class musicvolume : MonoBehaviour
 {
     private AudioSource musicSource;
-    private float musicVolume;
+    private float musicVolume=1f;
     void Start()
     {
         musicSource = GetComponent<AudioSource>();
@@ -25,12 +25,14 @@ public class musicvolume : MonoBehaviour
     void Update()
     {
         musicSource.volume = musicVolume;
-        PlayerPrefs.SetFloat("musicvolume", musicVolume);
-        PlayerPrefs.Save();
+        
+       // musicSource.volume = PlayerPrefs.GetFloat("musicvolume");
     }
     public void SetVolume(float volume)
     {
         musicVolume = volume;
-        
+        PlayerPrefs.SetFloat("musicvolume", volume);
+        PlayerPrefs.Save();
+
     }
 }
