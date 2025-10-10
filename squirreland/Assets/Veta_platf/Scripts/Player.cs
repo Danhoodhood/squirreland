@@ -2,7 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Player : Monser
+public class Player : Monser //ИГРОК
 {
     [SerializeField] float speed = 3f; //скорость движения
     
@@ -12,62 +12,61 @@ public class Player : Monser
     [Range(0f, 5f)] public float  checkGroundRadius = 0.3f;*/
 
     [SerializeField]private bool isAttacking = false; // атакуем ли
-    //[SerializeField] private bool isRecharged = false; // перезаредились ли
+    
 
     public Transform attackPos;//позиция атаки 
     public float attackRange;//дальность атаки
-    public LayerMask enemy;//
+    public LayerMask enemy;//Слой врагов
 
-    private float moveInput;//считывание движения
-    private bool factingRight = true;
+    private float moveInput;//// Ввод движения
+    private bool factingRight = true; //направление движения в начале
     
-    private Rigidbody2D rb;
-    private SpriteRenderer sprite;
+    private Rigidbody2D rb;// Физическое тело
+    private SpriteRenderer sprite;// Визуал персонажа
     public static Player Instance { get;  set; }//теперь можно обращаться к методам этого класса из других классов не создавая экземпляра этого класса в другом
     public Joystick joystick;
-    public AudioSource audioSourceJump;
-    public AudioSource audioSourceDamagePlayer;
-    //[SerializeField] private AudioSource audioSourceDamageMonster;
+    public AudioSource audioSourceJump;// Звук прыжка
+    public AudioSource audioSourceDamagePlayer;// Звук получения урона
 
-    [SerializeField]private Animator anim;
 
-   /* private States State
-    {
-        get { return (States)anim.GetInteger("state"); }
-        set { anim.SetInteger("state", (int)value); }
-    }*/
+    [SerializeField]private Animator anim;// Аниматор персонажа
 
-    private void Awake()
+
+
+    private void Awake()//ИНИЦИАЛИЗАЦИЯ
     {
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponentInChildren<SpriteRenderer>();
         Instance = this;
-        //isRecharged=true;
+        
 
         
         lives = 5;
     }
     
-    private void Run()
+    private void Run() //ДВИЖЕНИЕ ИГРОКА
     {
-        // if (isGrounded) State = States.run;
 
+        // Расчет направления движения: направление взгляда * ввод джойстика
         Vector3 dir = transform.right*joystick.Horizontal;
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + dir, speed*Time.deltaTime);
-        //GetComponent<Rigidbody2D>().AddForce(transform.right * speed * moveInput, ForceMode2D.Impulse);
 
-        sprite.flipX = dir.x < 0.0f;//  ПОВОРОТ ЛЕВО-ПРАВО если направление меньше нуля flipX = true и он поворачивается влево
-        //rb.AddForce(transform.right * speed * moveInput, ForceMode2D.Impulse);
+        // Плавное перемещение к новой позиции
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + dir, speed*Time.deltaTime);
+
+        // Поворот спрайта в сторону движения
+        sprite.flipX = dir.x < 0.0f;
     }
 
-    public void Jump1()
+    public void Jump1() // ОСНОВНОЙ ПРЫЖОК
     {
 
-        //rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-        
+
+        // Запуск анимации прыжка
         anim.SetTrigger("jumpUp");
+
+        // Проверка прыжка на врага
         if (!isGrounded)
-        {
+        { // Поиск всех коллайдеров в радиусе 0.3 единицы
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.3f);
             foreach (Collider2D collider in colliders)
             {
@@ -77,59 +76,49 @@ public class Player : Monser
                     if (transform.position.y > collider.transform.position.y)
                     {
                        
-                       collider.GetComponent<Monser>().GetDamage();
-                       //audioSourceDamageMonster.Play();
+                       collider.GetComponent<Monser>().GetDamage(); // Нанесение урона врагу
+                                                                    //audioSourceDamageMonster.Play();
                     }
                 }
             }
         }
         else  {
-
+            // Обычный прыжок
             rb.velocity = Vector2.up*jumpForce;
             audioSourceJump.Play();
 
         }
     }
-    public void Jump()
+    public void Jump() //ПРОВЕРКА ПРЫЖКА
     {
         if (isGrounded) { Jump1(); }
     }
-    void Flip()
+    void Flip()//ПОВОРОТ ПЕРСОНАЖА
     {
         factingRight = !factingRight;
         Vector3 Scaler = transform.localScale;
         Scaler.x *=-1;
         transform.localScale = Scaler;  
     }
-    private void CheckGround()
+    private void CheckGround() //ПРОВЕРКА ЗЕМЛИ(ПЕРСОНАЖ НА ЗЕМЛЕ)
     {
         Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, 0.3f);
         isGrounded = collider.Length > 1;
-        //new Vector2(transform.position.x, transform.position.y+checkGroundOffsetY), checkGroundRadius
-        /*if (collider.Length>1)
-        {
-            isGrounded = true;
-        }
-        else
-        {
-            isGrounded= false;
-        }
-        if (!isGrounded)
-        {
-           // State = States.jump;
-        }
-*/
+      
+
     }
     void Start()
     {
         //anim = GetComponent<Animator>();
     }
 
-    private void FixedUpdate()
+    private void FixedUpdate() //УПРАВЛЕНИЕ
     {
         CheckGround();
-        moveInput = Input.GetAxis("Horizontal");
-        if(factingRight == false && joystick.Horizontal >0)
+        moveInput = Input.GetAxis("Horizontal");// Ввод с клавиатуры
+
+        // ПОВОРОТ ПЕРСОНАЖА ПО НАПРАВЛЕНИЮ ДВИЖЕНИЯ
+        if (factingRight == false && joystick.Horizontal >0)
         {
             Flip();
         }
@@ -138,25 +127,19 @@ public class Player : Monser
             Flip();
         }
     }
-    void Update()
+    void Update()//ОБНОВЛЕНИЕ КАЖДЫЙ КАДР 
     {
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)) // Обработка прыжка 
         {
             Jump();
         }
 
-        /*if (moveInput== 0)
-        { anim.SetBool("isRunning", false);
-        }
-        else
-        {
-            anim.SetBool("isRunning", true);
-        }*/
+        // Анимации
         if (isGrounded)
         {
             anim.SetBool("isJump", false);
-           // anim.ResetTrigger("jumpUp");
+          
            
         }
         else
@@ -175,16 +158,11 @@ public class Player : Monser
         {
             anim.SetBool("isRunning", false);
         }
-       /* if (isGrounded &&  joystick.Vertical>=0.55f)//закоментить всё это! условие при билде(начало)
-        {
-            Jump();
-            //anim.SetTrigger("jumpUp");
-
-        }//(конец)*/
+       
 
 
     }
-    public override void GetDamage()
+    public override void GetDamage() //// Получение урона персонажем
     {
         HeartSystem.health--;
         
@@ -193,29 +171,31 @@ public class Player : Monser
         Debug.Log(lives);
         audioSourceDamagePlayer.Play();
     }
-    private IEnumerator AttackCoolDown()
+    private IEnumerator AttackCoolDown() //ПЕРЕЗАРЯДКА АТАКИ
     {
         yield return new WaitForSeconds(0.5f);
         isAttacking = false;
     }
-    public void Attack()
+    public void Attack()//АТАКА ИГРОКА
     {
-        if (isGrounded ) {
+        if (isGrounded )
+        { // Атака возможна только стоя на земле
           //  State = States.attack;
             isAttacking = true;
             //isRecharged = false;
 
-            StartCoroutine(AttackCoolDown());
+            StartCoroutine(AttackCoolDown()); // Запуск перезарядки атаки
 
             Debug.Log("УДАР");
 
+            // Поиск врагов в зоне атаки: круг вокруг attackPos
             Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPos.position, attackRange, enemy);
             
 
-            for (int i = 0; i < colliders.Length; i++)
+            for (int i = 0; i < colliders.Length; i++) // Перебор всех найденных врагов
             {
 
-                colliders[i].GetComponent<Monser>().GetDamage();
+                colliders[i].GetComponent<Monser>().GetDamage();// Нанесение урона каждому врагу в зоне
             }
         }
     }
@@ -228,13 +208,13 @@ public class Player : Monser
             colliders[i].GetComponent<Monser>().GetDamage();
         }   
     }
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected() //// Визуализация зоны атаки 
     {   
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPos.position, attackRange);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)//персонаж двигается вместе с платформой когда дотрагивается до нее 
+    private void OnCollisionEnter2D(Collision2D collision)// Присоединение к движущейся платформе
     {
         if (collision.gameObject.name.Equals("moving_platform"))
         {
@@ -243,7 +223,7 @@ public class Player : Monser
 
     }
     
-    private void OnCollisionExit2D(Collision2D collision)//персонаж не двигается вместе с платформой
+    private void OnCollisionExit2D(Collision2D collision)//// Отсоединение от движущейся платформы
     {
         if (collision.gameObject.name.Equals("moving_platform"))
         {
@@ -254,10 +234,3 @@ public class Player : Monser
 
     
 }
-/*public enum States
-{
-    idle,
-    run,
-    jump
-}
-*/

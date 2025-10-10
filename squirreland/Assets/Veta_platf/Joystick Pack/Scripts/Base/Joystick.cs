@@ -3,19 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+
+// КЛАСС ВИРТУАЛЬНОГО ДЖОЙСТИКА ДЛЯ МОБИЛЬНОГО УПРАВЛЕНИЯ
 public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
+    // Свойства для получения значений джойстика
     public float Horizontal { get { return (snapX) ? SnapFloat(input.x, AxisOptions.Horizontal) : input.x; } }
     public float Vertical { get { return (snapY) ? SnapFloat(input.y, AxisOptions.Vertical) : input.y; } }
     public Vector2 Direction { get { return new Vector2(Horizontal, Vertical); } }
 
-    public float HandleRange
+    public float HandleRange // Настройки диапазона и мертвой зоны джойстика
     {
         get { return handleRange; }
         set { handleRange = Mathf.Abs(value); }
     }
 
-    public float DeadZone
+    public float DeadZone // Настройки осей и привязки
     {
         get { return deadZone; }
         set { deadZone = Mathf.Abs(value); }
@@ -25,20 +28,21 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     public bool SnapX { get { return snapX; } set { snapX = value; } }
     public bool SnapY { get { return snapY; } set { snapY = value; } }
 
-    [SerializeField] private float handleRange = 1;
-    [SerializeField] private float deadZone = 0;
-    [SerializeField] private AxisOptions axisOptions = AxisOptions.Both;
-    [SerializeField] private bool snapX = false;
-    [SerializeField] private bool snapY = false;
+    [SerializeField] private float handleRange = 1; // Радиус движения ручки
+    [SerializeField] private float deadZone = 0;// Мертвая зона в центре
+    [SerializeField] private AxisOptions axisOptions = AxisOptions.Both;// Активные оси
+    [SerializeField] private bool snapX = false;// Привязка по горизонтали
+    [SerializeField] private bool snapY = false;// Привязка по вертикали
 
-    [SerializeField] protected RectTransform background = null;
-    [SerializeField] private RectTransform handle = null;
-    private RectTransform baseRect = null;
+    [SerializeField] protected RectTransform background = null; // Фон джойстика
+    [SerializeField] private RectTransform handle = null;// Ручка джойстика
+    private RectTransform baseRect = null;// Основной RectTransform
+
 
     private Canvas canvas;
     private Camera cam;
 
-    private Vector2 input = Vector2.zero;
+    private Vector2 input = Vector2.zero; // Входные данные джойстика
 
     protected virtual void Start()
     {
@@ -49,6 +53,9 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         if (canvas == null)
             Debug.LogError("The Joystick is not placed inside a canvas");
 
+
+        // Центрирование элементов джойстика
+
         Vector2 center = new Vector2(0.5f, 0.5f);
         background.pivot = center;
         handle.anchorMin = center;
@@ -57,17 +64,19 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         handle.anchoredPosition = Vector2.zero;
     }
 
-    public virtual void OnPointerDown(PointerEventData eventData)
+    public virtual void OnPointerDown(PointerEventData eventData)// Обработка нажатия на джойстик
     {
         OnDrag(eventData);
     }
 
-    public void OnDrag(PointerEventData eventData)
+    public void OnDrag(PointerEventData eventData)     // Обработка перемещения пальца по джойстику
+
     {
         cam = null;
         if (canvas.renderMode == RenderMode.ScreenSpaceCamera)
             cam = canvas.worldCamera;
 
+        // Конвертация позиции в локальные координаты
         Vector2 position = RectTransformUtility.WorldToScreenPoint(cam, background.position);
         Vector2 radius = background.sizeDelta / 2;
         input = (eventData.position - position) / (radius * canvas.scaleFactor);
@@ -76,6 +85,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         handle.anchoredPosition = input * radius * handleRange;
     }
 
+    // Обработка входных данных с учетом мертвой зоны
     protected virtual void HandleInput(float magnitude, Vector2 normalised, Vector2 radius, Camera cam)
     {
         if (magnitude > deadZone)
@@ -87,14 +97,18 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
             input = Vector2.zero;
     }
 
+
+    // Форматирование ввода согласно выбранным осям
     private void FormatInput()
     {
-        if (axisOptions == AxisOptions.Horizontal)
-            input = new Vector2(input.x, 0f);
+        if (axisOptions == AxisOptions.Horizontal) 
+            input = new Vector2(input.x, 0f);// Только горизонтальное движение
         else if (axisOptions == AxisOptions.Vertical)
-            input = new Vector2(0f, input.y);
+            input = new Vector2(0f, input.y);// Только вертикальное движение
     }
 
+
+    // Привязка значений к дискретным позициям
     private float SnapFloat(float value, AxisOptions snapAxis)
     {
         if (value == 0)
@@ -129,13 +143,13 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         return 0;
     }
 
-    public virtual void OnPointerUp(PointerEventData eventData)
+    public virtual void OnPointerUp(PointerEventData eventData)  // Сброс джойстика при отпускании
     {
         input = Vector2.zero;
         handle.anchoredPosition = Vector2.zero;
     }
 
-    protected Vector2 ScreenPointToAnchoredPosition(Vector2 screenPosition)
+    protected Vector2 ScreenPointToAnchoredPosition(Vector2 screenPosition) // Сброс джойстика при отпускании
     {
         Vector2 localPoint = Vector2.zero;
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(baseRect, screenPosition, cam, out localPoint))
@@ -147,4 +161,4 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     }
 }
 
-public enum AxisOptions { Both, Horizontal, Vertical }
+public enum AxisOptions { Both, Horizontal, Vertical }// Перечисление доступных осей управления

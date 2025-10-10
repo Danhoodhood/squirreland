@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Monster1 : Monser//червь
+public class Monster1 : Monser//КЛАСС ВРАГА: жук 1
 
 {
     //[SerializeField] private AudioSource audioSourceDieMonster;
-    [SerializeField] private Animator anim;
+    [SerializeField] private Animator anim; // Аниматор для управления анимациями
 
     private void Start()
     {
-        lives = 1;
+        lives = 1; // Установка начального количества жизней
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)   // Обработка столкновений с другими объектами
     {
         if (collision.gameObject.CompareTag("Player")) // Проверяем, что столкнулись с игроком
         {
@@ -22,26 +22,27 @@ public class Monster1 : Monser//червь
 
             if (playerY > monsterY) // Проверяем, что игрок находится выше по оси Y
             {
-                // Игрок прыгнул на монстра сверху, не наносим урон
+                // Игрок прыгнул на монстра сверху, наносим урон
                 Debug.Log("Игрок прыгнул на монстра сверху, урон наносится монстру.");
                 lives--;
                 Debug.Log("У монстра " + lives + " жизней");
-                //
+                
 ;
+
+                // Проверка смерти монстра после получения урона
                 if (lives < 1)
                 {
-                    //audioSourceDieMonster.Play();
+                    
                     Die();
                 }
             }
             else
             {
-                // Игрок касается монстра сбоку или снизу, наносим урон
+                // Игрок касается монстра сбоку или снизу, наносим урон игроку
                 Player.Instance.GetDamage();
                 anim.SetTrigger("isAttacking1");
-                //anim.SetBool("isAttacking", true);
                 Debug.Log("Игрок получил урон");
-                //anim.SetBool("isAttacking", false);
+                
 
             }
         }
