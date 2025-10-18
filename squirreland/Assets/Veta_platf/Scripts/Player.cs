@@ -43,17 +43,12 @@ public class Player : Monser //ИГРОК
         
         lives = 5;
     }
-    
-    private void Run() //ДВИЖЕНИЕ ИГРОКА
+
+    private void Run(float move) //ДВИЖЕНИЕ ИГРОКА
     {
+        Vector3 dir = transform.right * move;
 
-        // Расчет направления движения: направление взгляда * ввод джойстика
-        Vector3 dir = transform.right*joystick.Horizontal;
-
-        // Плавное перемещение к новой позиции
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + dir, speed*Time.deltaTime);
-
-        // Поворот спрайта в сторону движения
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + dir, speed * Time.deltaTime);
         sprite.flipX = dir.x < 0.0f;
     }
 
@@ -115,7 +110,8 @@ public class Player : Monser //ИГРОК
     private void FixedUpdate() //УПРАВЛЕНИЕ
     {
         CheckGround();
-        moveInput = Input.GetAxis("Horizontal");// Ввод с клавиатуры
+        // Объединяем ввод с клавиатуры и с джойстика
+        moveInput = Input.GetAxis("Horizontal") + joystick.Horizontal;
 
         // ПОВОРОТ ПЕРСОНАЖА ПО НАПРАВЛЕНИЮ ДВИЖЕНИЯ
         if (factingRight == false && joystick.Horizontal >0)
@@ -149,16 +145,16 @@ public class Player : Monser //ИГРОК
             
         }
 
-        if (joystick.Horizontal !=0 && !isAttacking)
+        if (Mathf.Abs(moveInput) > 0.01f && !isAttacking)
         {
-            Run();
+            Run(moveInput); // передаём направление
             anim.SetBool("isRunning", true);
         }
         else
         {
             anim.SetBool("isRunning", false);
         }
-       
+
 
 
     }
