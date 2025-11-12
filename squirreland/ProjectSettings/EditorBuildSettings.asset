@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/main_menu.unity
     guid: 6f626799b44ddf349a35101aaa9cdbe5
   - enabled: 1
-    path: Assets/Veta_platf/Scenes/stroyka_end.unity
+    path: Assets/Scenes/Scenes/stroyka_end.unity
     guid: 0208a70a43a15df46bb1f5ee0c53f2c1
   - enabled: 0
     path: Assets/Veta_platf/Scenes/Platformer.unity
@@ -24,7 +24,7 @@ EditorBuildSettings:
     path: Assets/Veta_platf/Scenes/Platf_level3.unity
     guid: 1860c7a0ce554b840bf62d6e7ba7d5b4
   - enabled: 1
-    path: Assets/Scenes/Heart_bit.unity
+    path: Assets/Scenes/Scenes/Heart_bit.unity
     guid: 3fc8acdd13e6c734bafef6554d6fdbcd
   - enabled: 1
     path: Assets/search_acorns.unity
@@ -33,22 +33,22 @@ EditorBuildSettings:
     path: Assets/Enigma/Scenes/Game.unity
     guid: 6fc64388c63653b499abe6beaa25fdf9
   - enabled: 1
-    path: Assets/Veta_platf/Scenes/bar_squirrel_scenes 2.unity
+    path: Assets/Scenes/Scenes/bar_squirrel_scenes 2.unity
     guid: 63f32aeef2bf40a469f40916c0084ebf
   - enabled: 1
-    path: Assets/Veta_platf/Scenes/laba.unity
+    path: Assets/Scenes/Scenes/laba.unity
     guid: 6e7afe4e9f897cb4c93853e0b8396f31
   - enabled: 1
-    path: Assets/Veta_platf/Scenes/bar_squirrel_scenes 1.unity
+    path: Assets/Scenes/Scenes/bar_squirrel_scenes 1.unity
     guid: f05e87a1d3727694dbfab43a99a7ff02
   - enabled: 1
-    path: Assets/Veta_platf/Scenes/bar_scense_1.unity
+    path: Assets/Scenes/Scenes/bar_scense_1.unity
     guid: c5f11b51f09364340ba7cbc3707d9a1a
   - enabled: 1
-    path: Assets/Veta_platf/Scenes/bar_end.unity
+    path: Assets/Scenes/Scenes/bar_end.unity
     guid: f5a72d0b1cb985e40baf94e5a25e2a13
   - enabled: 1
-    path: Assets/Veta_platf/Scenes/stroyka_scence3.unity
+    path: Assets/Scenes/Scenes/stroyka_scence3.unity
     guid: a34be4186385ef94bba488f4ee006b77
   - enabled: 1
     path: Assets/Veta_platf/Scenes/Platf_level4.unity
