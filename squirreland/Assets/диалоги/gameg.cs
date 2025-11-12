@@ -2,48 +2,40 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// Скрипт для перехода между сценами с рекламой
 public class gameg : MonoBehaviour
 {
-    public GameObject startbutton;  // Кнопка старта уровня
-    public string namelvl;          // Имя следующей сцены
-    public GameObject rewardButton; // Кнопка для Rewarded Ads
+    public GameObject startbutton;
+    public string namelvl;
 
+    // При входе в триггер появляется кнопка "Старт"
     void OnTriggerEnter2D(Collider2D col)
     {
-        startbutton.SetActive(true);
-        rewardButton.SetActive(true);
+        startbutton.SetActive(true); // Игрок вошёл в зону триггера — показываем кнопку "Старт"
     }
 
+    // При выходе из триггера — скрываем кнопку
     void OnTriggerExit2D(Collider2D col)
     {
-        startbutton.SetActive(false);
-        rewardButton.SetActive(false);
+        startbutton.SetActive(false);  // Игрок вышел из зоны — скрываем кнопку
     }
 
-    // Переход между сценами с межстраничной рекламой
+    // При нажатии кнопки — сначала показываем рекламу, потом загружаем уровень
     public void startgame()
     {
-        StartCoroutine(ShowAdThenLoad());
-    }
-
-    private IEnumerator ShowAdThenLoad()
-    {
+        // Проверяем, есть ли AdsManager
         if (AdsManager.Instance != null)
         {
-            AdsManager.Instance.ShowInterstitial();
-            yield return new WaitForSeconds(3f); // ждем, пока реклама покажется
+            // Показываем рекламу и переходим после закрытия
+            AdsManager.Instance.ShowInterstitial(() =>
+            {
+                Debug.Log("[GameG] Реклама завершена, загружаем сцену: " + namelvl);
+                SceneManager.LoadScene(namelvl);
+            });
         }
-
-        SceneManager.LoadScene(namelvl);
-    }
-
-    // Кнопка для вознаграждаемой рекламы
-    public void ShowRewardedAd()
-    {
-        if (AdsManager.Instance != null)
+        else
         {
-            AdsManager.Instance.ShowRewarded();
+            // Если рекламы нет — просто загружаем сцену
+            SceneManager.LoadScene(namelvl);
         }
     }
 }

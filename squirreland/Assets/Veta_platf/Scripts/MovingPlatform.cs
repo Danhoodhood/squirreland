@@ -16,14 +16,15 @@ public class MovingPlatform : MonoBehaviour// КЛАСС ДВИЖУЩЕЙСЯ ПЛАТФОРМЫ
         Vector2 target = currentMovementTarget();// Получение текущей цели движения
 
         // Плавное перемещение платформы 
-        platform.position = Vector2.Lerp(platform.position, target, speed * Time.deltaTime);
+        platform.position = Vector2.Lerp(platform.position, target, speed * Time.deltaTime); // Плавное движение платформы
+
 
         float distance = (target - (Vector2)platform.position).magnitude; // Расчет расстояния до цели
 
         // Смена направления при достижении точки
         if (distance <= 1f)
         {
-            direction *= -1;// Разворот направления движения
+            direction *= -1;// Разворот направления движения // Смена направления движения — физическое взаимодействие через движение платформы
         }
     }
 
@@ -39,6 +40,8 @@ public class MovingPlatform : MonoBehaviour// КЛАСС ДВИЖУЩЕЙСЯ ПЛАТФОРМЫ
         }
     }
 
+
+    // Визуализация пути движения платформы
     private void OnDrawGizmos()  // Визуализация путей в редакторе
     {
         if (platform != null && startPoint != null && endPoint != null)

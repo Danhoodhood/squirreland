@@ -1,232 +1,166 @@
 using System.Collections;
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Monser //ИГРОК
+public class Player : Monser // Игрок наследуется от Monser (врагов)
 {
-    [SerializeField] float speed = 3f; //скорость движения
-    
-    [SerializeField] private float jumpForce = 15f;// сила прыжка
-    [SerializeField] private bool isGrounded = false;
-    /*[Range(-5f, 5f)]public float checkGroundOffsetY = -1.8f;
-    [Range(0f, 5f)] public float  checkGroundRadius = 0.3f;*/
+    [SerializeField] float speed = 3f; // Скорость движения
+    [SerializeField] private float jumpForce = 15f; // Сила прыжка
+    [SerializeField] private bool isGrounded = false; // Проверка, стоит ли игрок на земле
 
-    [SerializeField]private bool isAttacking = false; // атакуем ли
-    
+    [SerializeField] private bool isAttacking = false; // Флаг атаки
 
-    public Transform attackPos;//позиция атаки 
-    public float attackRange;//дальность атаки
-    public LayerMask enemy;//Слой врагов
+    public Transform attackPos; // Позиция зоны атаки
+    public float attackRange; // Радиус зоны атаки
+    public LayerMask enemy; // Слой врагов для атаки
 
-    private float moveInput;//// Ввод движения
-    private bool factingRight = true; //направление движения в начале
-    
-    private Rigidbody2D rb;// Физическое тело
-    private SpriteRenderer sprite;// Визуал персонажа
-    public static Player Instance { get;  set; }//теперь можно обращаться к методам этого класса из других классов не создавая экземпляра этого класса в другом
-    public Joystick joystick;
-    public AudioSource audioSourceJump;// Звук прыжка
-    public AudioSource audioSourceDamagePlayer;// Звук получения урона
+    private float moveInput; // Ввод по горизонтали
+    private bool factingRight = true; // Направление взгляда игрока
 
+    private Rigidbody2D rb; // Rigidbody2D — физическое тело игрока
+    private SpriteRenderer sprite; // Отображение спрайта игрока
+    public static Player Instance { get; set; } // Синглтон для доступа из других классов
 
-    [SerializeField]private Animator anim;// Аниматор персонажа
+    public Joystick joystick; // Джойстик для управления
+    public AudioSource audioSourceJump; // Звук прыжка
+    public AudioSource audioSourceDamagePlayer; // Звук получения урона
 
+    [SerializeField] private Animator anim; // Аниматор игрока
 
-
-    private void Awake()//ИНИЦИАЛИЗАЦИЯ
+    private void Awake() // Инициализация
     {
-        rb = GetComponent<Rigidbody2D>();
-        sprite = GetComponentInChildren<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>(); // Получение Rigidbody2D
+        sprite = GetComponentInChildren<SpriteRenderer>(); // Получение спрайта
         Instance = this;
-        
 
-        
-        lives = 5;
+        lives = 5; // Начальные жизни игрока
     }
 
-    private void Run(float move) //ДВИЖЕНИЕ ИГРОКА
+    private void Run(float move) // Движение игрока
     {
         Vector3 dir = transform.right * move;
-
         transform.position = Vector3.MoveTowards(transform.position, transform.position + dir, speed * Time.deltaTime);
+
+        // Отражение спрайта при смене направления движения
         sprite.flipX = dir.x < 0.0f;
     }
 
-    public void Jump1() // ОСНОВНОЙ ПРЫЖОК
+    public void Jump1() // Основной прыжок
     {
+        anim.SetTrigger("jumpUp"); // Анимация прыжка
 
-
-        // Запуск анимации прыжка
-        anim.SetTrigger("jumpUp");
-
-        // Проверка прыжка на врага
-        if (!isGrounded)
-        { // Поиск всех коллайдеров в радиусе 0.3 единицы
+        if (!isGrounded) // Если игрок в воздухе
+        {
+            // Проверка прыжка на врага
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.3f);
             foreach (Collider2D collider in colliders)
             {
-                if (collider.CompareTag("Enemy"))
+                if (collider.CompareTag("Enemy") && transform.position.y > collider.transform.position.y)
                 {
-                    // Проверяем, что игрок прыгает на врага
-                    if (transform.position.y > collider.transform.position.y)
-                    {
-                       
-                       collider.GetComponent<Monser>().GetDamage(); // Нанесение урона врагу
-                                                                    //audioSourceDamageMonster.Play();
-                    }
+                    collider.GetComponent<Monser>().GetDamage(); // Нанесение урона врагу
                 }
             }
         }
-        else  {
-            // Обычный прыжок
-            rb.velocity = Vector2.up*jumpForce;
+        else
+        {
+            // Обычный прыжок при нахождении на земле
+            rb.velocity = Vector2.up * jumpForce; // Используем Rigidbody2D для физического прыжка
             audioSourceJump.Play();
-
         }
     }
-    public void Jump() //ПРОВЕРКА ПРЫЖКА
+
+    public void Jump() // Метод проверки возможности прыжка
     {
-        if (isGrounded) { Jump1(); }
+        if (isGrounded) Jump1();
     }
-    void Flip()//ПОВОРОТ ПЕРСОНАЖА
+
+    void Flip() // Разворот персонажа
     {
         factingRight = !factingRight;
         Vector3 Scaler = transform.localScale;
-        Scaler.x *=-1;
-        transform.localScale = Scaler;  
-    }
-    private void CheckGround() //ПРОВЕРКА ЗЕМЛИ(ПЕРСОНАЖ НА ЗЕМЛЕ)
-    {
-        Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, 0.3f);
-        isGrounded = collider.Length > 1;
-      
-
-    }
-    void Start()
-    {
-        //anim = GetComponent<Animator>();
+        Scaler.x *= -1;
+        transform.localScale = Scaler;
     }
 
-    private void FixedUpdate() //УПРАВЛЕНИЕ
+    private void CheckGround() // Проверка, стоит ли игрок на земле
+    {
+        Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, 0.3f); // Проверка коллайдерами
+        isGrounded = collider.Length > 1; // Если есть коллайдеры кроме самого игрока
+    }
+
+    private void FixedUpdate() // Физический апдейт
     {
         CheckGround();
-        // Объединяем ввод с клавиатуры и с джойстика
+
+        // Объединяем ввод с клавиатуры и джойстика
         moveInput = Input.GetAxis("Horizontal") + joystick.Horizontal;
 
-        // ПОВОРОТ ПЕРСОНАЖА ПО НАПРАВЛЕНИЮ ДВИЖЕНИЯ
-        if (factingRight == false && joystick.Horizontal >0)
-        {
-            Flip();
-        }
-        else if(factingRight == true && joystick.Horizontal < 0)
-        {
-            Flip();
-        }
+        // Разворот игрока по направлению движения
+        if (!factingRight && joystick.Horizontal > 0) Flip();
+        else if (factingRight && joystick.Horizontal < 0) Flip();
     }
-    void Update()//ОБНОВЛЕНИЕ КАЖДЫЙ КАДР 
-    {
 
-        if (Input.GetKeyDown(KeyCode.Space)) // Обработка прыжка 
-        {
-            Jump();
-        }
+    void Update() // Апдейт каждый кадр
+    {
+        if (Input.GetKeyDown(KeyCode.Space)) Jump(); // Прыжок
 
         // Анимации
-        if (isGrounded)
-        {
-            anim.SetBool("isJump", false);
-          
-           
-        }
-        else
-        {
-            
-            anim.SetBool("isJump", true);
-            
-        }
+        anim.SetBool("isJump", !isGrounded);
+        anim.SetBool("isRunning", Mathf.Abs(moveInput) > 0.01f && !isAttacking);
 
         if (Mathf.Abs(moveInput) > 0.01f && !isAttacking)
-        {
-            Run(moveInput); // передаём направление
-            anim.SetBool("isRunning", true);
-        }
-        else
-        {
-            anim.SetBool("isRunning", false);
-        }
-
-
-
+            Run(moveInput); // Движение игрока
     }
-    public override void GetDamage() //// Получение урона персонажем
+
+    public override void GetDamage() // Получение урона
     {
-        HeartSystem.health--;
-        
-        lives  -= 1;
-
-        Debug.Log(lives);
+        HeartSystem.health--; // Система здоровья
+        lives -= 1;
         audioSourceDamagePlayer.Play();
+        Debug.Log(lives);
     }
-    private IEnumerator AttackCoolDown() //ПЕРЕЗАРЯДКА АТАКИ
+
+    private IEnumerator AttackCoolDown() // Перезарядка атаки
     {
         yield return new WaitForSeconds(0.5f);
         isAttacking = false;
     }
-    public void Attack()//АТАКА ИГРОКА
+
+    public void Attack() // Атака игрока
     {
-        if (isGrounded )
-        { // Атака возможна только стоя на земле
-          //  State = States.attack;
+        if (isGrounded)
+        {
             isAttacking = true;
-            //isRecharged = false;
+            StartCoroutine(AttackCoolDown());
 
-            StartCoroutine(AttackCoolDown()); // Запуск перезарядки атаки
-
-            Debug.Log("УДАР");
-
-            // Поиск врагов в зоне атаки: круг вокруг attackPos
             Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPos.position, attackRange, enemy);
-            
-
-            for (int i = 0; i < colliders.Length; i++) // Перебор всех найденных врагов
+            for (int i = 0; i < colliders.Length; i++)
             {
-
-                colliders[i].GetComponent<Monser>().GetDamage();// Нанесение урона каждому врагу в зоне
+                colliders[i].GetComponent<Monser>().GetDamage();
             }
         }
     }
 
-    private void OnAttack()
+    private void OnDrawGizmosSelected() // Визуализация зоны атаки
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPos.position, attackRange, enemy);
-
-        for(int i = 0; i < colliders.Length; i++) {
-            colliders[i].GetComponent<Monser>().GetDamage();
-        }   
-    }
-    private void OnDrawGizmosSelected() //// Визуализация зоны атаки 
-    {   
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPos.position, attackRange);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)// Присоединение к движущейся платформе
+    private void OnCollisionEnter2D(Collision2D collision) // Обработка столкновений
     {
+        // Присоединение к движущейся платформе
         if (collision.gameObject.name.Equals("moving_platform"))
         {
             this.transform.parent = collision.transform;
         }
-
     }
-    
-    private void OnCollisionExit2D(Collision2D collision)//// Отсоединение от движущейся платформы
+
+    private void OnCollisionExit2D(Collision2D collision) // Выход со столкновения
     {
         if (collision.gameObject.name.Equals("moving_platform"))
         {
             this.transform.parent = null;
         }
-
     }
-
-    
 }

@@ -17,13 +17,13 @@ public class Monser : MonoBehaviour // БАЗОВЫЙ КЛАСС ВСЕХ ВРАГОВ
         if (lives <= 0)
         {
             
-            Die();
+            Die(); // Реакция на "физическое" столкновение с игроком
         }
     }
     public virtual void Die() // Виртуальный метод смерти врага
     {
         audioSourceDamageMonster.Play();// Воспроизведение звука смерти
-        Destroy(this.gameObject, 0.5f);// Уничтожение объекта через 0.5 секунды
+        Destroy(this.gameObject, 0.5f);// Уничтожение объекта через 0.5 секунды // Уничтожение объекта — физическое взаимодействие через Collider
 
     }
 }
