@@ -11,7 +11,8 @@ public class Monster1 : Monser//КЛАСС ВРАГА: жук 1
 
     private void Start()
     {
-        lives = 1; // Установка начального количества жизней
+        base.Start();
+        //lives = 1; // Установка начального количества жизней
     }
     private void OnCollisionEnter2D(Collision2D collision)   // Обработка столкновений с другими объектами
     {

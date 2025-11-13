@@ -14,14 +14,15 @@ TagManager:
   - point
   - score
   - defeat
+  - '"Player"'
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - obstacleLayer
   - Water
   - UI
-  - 
+  - playerLayer
   - 
   - 
   - 

@@ -1,82 +1,215 @@
-using System.Collections;
+п»їusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster2 : Monser //КЛАСС ВРАГА "ЖУК 2" С ПАТРУЛИРОВАНИЕМ
+// Monster2 С‚РµРїРµСЂСЊ СЂРµР°Р»РёР·СѓРµС‚ РїСЂРѕСЃС‚РѕР№ РєРѕРЅРµС‡РЅС‹Р№ Р°РІС‚РѕРјР°С‚ + РїРѕР»Рµ Р·СЂРµРЅРёСЏ
+public class Monster2 : Monser
 {
+    private enum State { Patrol, Chase, Return }
 
-    //private float speed = 3.5f;//скорость
-    private Vector3 dir;//// Направление движения монстра
-    private SpriteRenderer sprite;//// Спрайт для визуального отображения
+    [Header("Patrol")]
+    [SerializeField] private float minX;
+    [SerializeField] private float maxX;
+    [SerializeField] private float patrolSpeed = 1.5f;
 
+    [Header("Chase")]
+    [SerializeField] private float chaseSpeed = 3.0f;
+    [SerializeField] private float viewRadius = 4.0f;      // СЂР°РґРёСѓСЃ "Р·СЂРµРЅРёСЏ"
+    [Range(0, 360)][SerializeField] private float viewAngle = 90f; // СѓРіРѕР» Р·СЂРµРЅРёСЏ
+    [SerializeField] private LayerMask playerLayer;        // СЃР»РѕР№ РёРіСЂРѕРєР°
+    [SerializeField] private LayerMask obstacleLayer;      // СЃР»РѕР№ РїСЂРµРїСЏС‚СЃС‚РІРёР№ РґР»СЏ raycast
 
-    [SerializeField]private float minX;  // Минимальная граница патрулирования
-    [SerializeField]private float maxX;// Максимальная граница патрулирования
+    [Header("Other")]
+    [SerializeField] private Animator anim;
+    [SerializeField] private float lostTime = 2.0f; // РІСЂРµРјСЏ РґРѕ РїРµСЂРµС…РѕРґР° РІ Return РїРѕСЃР»Рµ РїРѕС‚РµСЂРё РёРіСЂРѕРєР°
 
-    [SerializeField] private Animator anim; // Аниматор для анимаций монстра
-    private void Start()
+    private Vector3 dir;
+    private SpriteRenderer sprite;
+    private State state = State.Patrol;
+    private Transform playerTransform;
+    private float lastSeenTime = -Mathf.Infinity;
+    private Vector3 lastSeenPosition;
+    private Vector3 patrolTarget;
+
+    private void Awake()
     {
-        dir = transform.right;//Начальное направление движения - вправо
-        lives = 2; // Жизни жука 2
+        sprite = GetComponentInChildren<SpriteRenderer>();
+    }
+
+    protected override void Start()
+    {
+       
+        
+        base.Start();
+        dir = transform.right;
+        patrolTarget = new Vector3(maxX, transform.position.y, transform.position.z);
+        // РќР°Р№РґС‘Рј РёРіСЂРѕРєР° РїРѕ С‚РµРіСѓ (РїРѕРґС…РѕРґРёС‚ РґР»СЏ РїСЂРѕСЃС‚РѕРіРѕ Р·Р°РґР°РЅРёСЏ)
+        GameObject p = GameObject.FindGameObjectWithTag("Player");
+        Debug.Log("Found player object: " + (p ? p.name : "NULL"));
+        if (p != null) playerTransform = p.transform;
+
+      
 
     }
 
     private void Update()
     {
-        Move();// Вызов метода движения каждый кадр
+        switch (state)
+        {
+            case State.Patrol:
+                PatrolUpdate();
+                // РїСЂРѕРІРµСЂСЏРµРј РІРёРґРёС‚ Р»Рё РІСЂР°Рі РёРіСЂРѕРєР°
+                if (CanSeePlayer())
+                {
+                    TransitionTo(State.Chase);
+                }
+                break;
+
+            case State.Chase:
+                ChaseUpdate();
+                if (CanSeePlayer())
+                {
+                    lastSeenTime = Time.time;
+                    lastSeenPosition = playerTransform.position;
+                }
+                else
+                {
+                    // РµСЃР»Рё РёРіСЂРѕРє РЅРµ РІРёРґРµРЅ Рё РїСЂРѕС€Р»Рѕ lostTime -> Return
+                    if (Time.time - lastSeenTime > lostTime)
+                        TransitionTo(State.Return);
+                }
+                break;
+
+            case State.Return:
+                ReturnUpdate();
+                if (CanSeePlayer())
+                {
+                    TransitionTo(State.Chase);
+                }
+                else
+                {
+                    // РµСЃР»Рё РґРѕС€Р»Рё РґРѕ РїР°С‚СЂСѓР»СЊРЅРѕР№ Р·РѕРЅС‹ -> Patrol
+                    if (Mathf.Abs(transform.position.x - patrolTarget.x) < 0.1f)
+                        TransitionTo(State.Patrol);
+                }
+                break;
+        }
     }
-   
 
-    private void Move()// Движение монстра между границами
+    #region State updates
+
+    private void PatrolUpdate()
     {
-        // Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position + transform.up*0.1f+ transform.right*dir.x*0.7f, 0.1f);
-
-        //if (colliders.Length> 1) dir*= -1f;
-
-        // разворот при достижении границ
+        // РїСЂРѕСЃС‚РѕРµ РїР°С‚СЂСѓР»РёСЂРѕРІР°РЅРёРµ РјРµР¶РґСѓ minX Рё maxX (РєР°Рє Р±С‹Р»Рѕ)
         if (transform.position.x < minX) dir = transform.right;
         else if (transform.position.x > maxX) dir = -transform.right;
 
-        // Плавное перемещение монстра 
-        transform.position =Vector3.MoveTowards(transform.position, transform.position+dir, Time.deltaTime);
-        sprite.flipX = dir.x > 0.0f;  // Поворот спрайта в сторону движения
-    }
-    private void Awake()
-    {
-        sprite = GetComponentInChildren<SpriteRenderer>(); // Получение компонента спрайта
-    }
-    public override void GetDamage()  // Переопределенный метод получения урона
-    {
-        
-        lives  -= 1;
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + dir, patrolSpeed * Time.deltaTime);
+        sprite.flipX = dir.x > 0.0f;
+        anim?.SetBool("isRunning", Mathf.Abs(patrolSpeed) > 0.01f);
+        // РїР°С‚СЂСѓР»СЊРЅР°СЏ С†РµР»СЊ вЂ” Р±Р»РёР¶Р°Р№С€Р°СЏ РіСЂР°РЅРёС†Р° (РґР»СЏ Return РІС‹С‡РёСЃР»СЏРµРј РѕР±СЂР°С‚РЅРѕ)
+        patrolTarget = dir.x > 0 ? new Vector3(maxX, transform.position.y, transform.position.z) : new Vector3(minX, transform.position.y, transform.position.z);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)// Обработка столкновений с игроком
+    private void ChaseUpdate()
     {
-        if (collision.gameObject.CompareTag("Player")) // Проверяем, что столкнулись с игроком
+        if (playerTransform == null) return;
+        // РїРµСЂРµРјРµС‰Р°РµРјСЃСЏ Рє РёРіСЂРѕРєСѓ
+        Vector3 target = new Vector3(playerTransform.position.x, transform.position.y, transform.position.z);
+        transform.position = Vector3.MoveTowards(transform.position, target, chaseSpeed * Time.deltaTime);
+
+        // РїРѕРІРѕСЂРѕС‚ СЃРїСЂР°Р№С‚Р°
+        sprite.flipX = (playerTransform.position.x - transform.position.x) > 0.0f;
+
+        // Р°РЅРёРјР°С†РёСЏ Р°С‚Р°РєРё/Р±РµРіР°
+        anim?.SetBool("isRunning", true);
+    }
+
+    private void ReturnUpdate()
+    {
+        // РёРґС‘Рј Рє РїРѕСЃР»РµРґРЅРµРјСѓ РїР°С‚СЂСѓР»СЊРЅРѕРјСѓ РЅР°РїСЂР°РІР»РµРЅРёСЋ (patrolTarget)
+        transform.position = Vector3.MoveTowards(transform.position, patrolTarget, patrolSpeed * Time.deltaTime);
+        sprite.flipX = (patrolTarget.x - transform.position.x) > 0.0f;
+        anim?.SetBool("isRunning", true);
+    }
+
+    #endregion
+
+    private void TransitionTo(State newState)
+    {
+        if (state == newState) return;
+        Debug.Log($"[Monster2] {state} -> {newState}");
+        state = newState;
+
+        if (state == State.Chase)
+        {
+            lastSeenTime = Time.time;
+            if (playerTransform != null) lastSeenPosition = playerTransform.position;
+        }
+    }
+
+    // РїСЂРѕРІРµСЂРєР° РІРёРґРёРјРѕСЃС‚Рё РёРіСЂРѕРєР° (СЂР°РґРёСѓСЃ + СѓРіРѕР» + raycast РЅР° РїСЂРµРїСЏС‚СЃС‚РІРёРµ)
+    private bool CanSeePlayer()
+    {
+        if (playerTransform == null) return false;
+
+        Vector2 toPlayer = playerTransform.position - transform.position;
+        float dist = toPlayer.magnitude;
+        if (dist > viewRadius) return false;
+
+        float angleToPlayer = Vector2.Angle(transform.right * dir.x, toPlayer);
+        if (angleToPlayer > viewAngle * 0.5f) return false;
+
+        // raycast РЅР° РїСЂРµРїСЏС‚СЃС‚РІРёСЏ
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, toPlayer.normalized, viewRadius, ~(~0 << 31)); // default mask
+        // Р›СѓС‡С€Рµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ obstacleLayer: РµСЃР»Рё hit Рё СЌС‚Рѕ РЅРµ РёРіСЂРѕРє вЂ” Р±Р»РѕРєРёСЂРѕРІРєР°
+        RaycastHit2D hit2 = Physics2D.Raycast(transform.position, toPlayer.normalized, viewRadius, obstacleLayer | playerLayer);
+        if (hit2.collider != null)
+        {
+            if (hit2.collider.CompareTag("Player")) return true;
+            else return false;
+        }
+
+        // РЅР° РІСЃСЏРєРёР№ СЃР»СѓС‡Р°Р№ fallback
+        return false;
+    }
+
+    // РІРёР·СѓР°Р»РёР·РёСЂСѓРµРј СЃРµРєС‚РѕСЂ Р·СЂРµРЅРёСЏ
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, viewRadius);
+
+        Vector3 forward = transform.right * (dir.x >= 0 ? 1f : -1f);
+        float half = viewAngle * 0.5f;
+        Vector3 a = Quaternion.Euler(0, 0, half) * forward;
+        Vector3 b = Quaternion.Euler(0, 0, -half) * forward;
+        Gizmos.DrawLine(transform.position, transform.position + a.normalized * viewRadius);
+        Gizmos.DrawLine(transform.position, transform.position + b.normalized * viewRadius);
+    }
+
+    // РѕР±СЂР°Р±РѕС‚РєР° СЃС‚РѕР»РєРЅРѕРІРµРЅРёР№ РѕСЃС‚Р°РІР»СЏРµРј РєР°Рє СЂР°РЅСЊС€Рµ
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
         {
             float playerY = collision.gameObject.transform.position.y;
             float monsterY = transform.position.y;
 
-            if (playerY > monsterY) // Проверяем, что игрок находится выше по оси Y
+            if (playerY > monsterY)
             {
-                // Игрок прыгнул на монстра сверху, наносим урон монстру
                 GetDamage();
-                Debug.Log("Игрок прыгнул на монстра сверху, урон наносится монстру.");
+                Debug.Log("РРіСЂРѕРє РїСЂС‹РіРЅСѓР» РЅР° РјРѕРЅСЃС‚СЂР° СЃРІРµСЂС…Сѓ, СѓСЂРѕРЅ РЅР°РЅРѕСЃРёС‚СЃСЏ РјРѕРЅСЃС‚СЂСѓ.");
 
                 if (lives < 1)
                     Die();
             }
             else
             {
-                // Игрок касается монстра сбоку или снизу, урон наносится игроку
                 Player.Instance.GetDamage();
-                anim.SetTrigger("isAttacking1");
-                //anim.SetBool("isAttacking", true);
-                Debug.Log("Монстр касается игрока сбоку или снизу,  урон  наносится.");
-               // anim.SetBool("isAttacking", false);
+                anim?.SetTrigger("isAttacking1");
+                Debug.Log("РњРѕРЅСЃС‚СЂ РєР°СЃР°РµС‚СЃСЏ РёРіСЂРѕРєР° СЃР±РѕРєСѓ РёР»Рё СЃРЅРёР·Сѓ, СѓСЂРѕРЅ РЅР°РЅРѕСЃРёС‚СЃСЏ.");
             }
         }
     }
-
 }

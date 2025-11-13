@@ -2,28 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monser : MonoBehaviour // БАЗОВЫЙ КЛАСС ВСЕХ ВРАГОВ
+public class Monser : MonoBehaviour
 {
-    //public AudioSource audioSourceGetDamage;
-    protected int lives; // Количество жизней врага
-    public AudioSource audioSourceDamageMonster; // Звук получения урона
-    public virtual void GetDamage() // Виртуальный метод получения урона
+    protected int lives;
+    public AudioSource audioSourceDamageMonster;
+    [SerializeField] protected MonsterData monsterData;
+
+    // Добавляем ссылку на AI компонент
+    protected EnemyAI enemyAI;
+
+    protected virtual void Start()
     {
+        if (monsterData != null)
+        {
+            lives = monsterData.lives;
+        }
 
+        // Получаем компонент AI
+        enemyAI = GetComponent<EnemyAI>();
+    }
+
+    public virtual void GetDamage()
+    {
         lives -= 1;
-        //audioSourceGetDamage.Play();
 
-        // Проверка смерти
+        // Если есть AI - переходим в состояние преследования при получении урона
+        if (enemyAI != null)
+        {
+            enemyAI.currentState = EnemyState.Chase;
+        }
+
         if (lives <= 0)
         {
-            
-            Die(); // Реакция на "физическое" столкновение с игроком
+            Die();
         }
     }
-    public virtual void Die() // Виртуальный метод смерти врага
-    {
-        audioSourceDamageMonster.Play();// Воспроизведение звука смерти
-        Destroy(this.gameObject, 0.5f);// Уничтожение объекта через 0.5 секунды // Уничтожение объекта — физическое взаимодействие через Collider
 
+    public virtual void Die()
+    {
+        audioSourceDamageMonster.Play();
+        Destroy(this.gameObject, 0.5f);
+    }
+
+    // Новый метод для атаки
+    public virtual void PerformAttack()
+    {
+        // Базовая реализация атаки
+        Debug.Log($"{gameObject.name} атакует!");
     }
 }
