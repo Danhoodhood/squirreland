@@ -37,6 +37,11 @@ public class Monster2 : Monser
         sprite = GetComponentInChildren<SpriteRenderer>();
         originalScale = transform.localScale; // сохраняем исходный масштаб
     }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, viewRadius);
+    }
 
     protected override void Start()
     {
