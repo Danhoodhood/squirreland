@@ -1,16 +1,16 @@
-using System.Collections.Generic;
+п»їusing System.Collections.Generic;
 using UnityEngine;
-using FakeAnalytics; // Пространство имён SDK аналитики
+using FakeAnalytics; // РџСЂРѕСЃС‚СЂР°РЅСЃС‚РІРѕ РёРјС‘РЅ SDK Р°РЅР°Р»РёС‚РёРєРё
 
-// Менеджер аналитики — инициализация и управление событиями
-// Реализует все пункты лабораторной: события, инициализацию, flush при потере фокуса
+// РњРµРЅРµРґР¶РµСЂ Р°РЅР°Р»РёС‚РёРєРё вЂ” РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ Рё СѓРїСЂР°РІР»РµРЅРёРµ СЃРѕР±С‹С‚РёСЏРјРё
+// Р РµР°Р»РёР·СѓРµС‚ РІСЃРµ РїСѓРЅРєС‚С‹ Р»Р°Р±РѕСЂР°С‚РѕСЂРЅРѕР№: СЃРѕР±С‹С‚РёСЏ, РёРЅРёС†РёР°Р»РёР·Р°С†РёСЋ, flush РїСЂРё РїРѕС‚РµСЂРµ С„РѕРєСѓСЃР°
 public class AnalyticsManager : MonoBehaviour
 {
     public static AnalyticsManager Instance;
 
     private FakeAnalyticsSDK analytics;
 
-    [Header("SDK Настройки")]
+    [Header("SDK РќР°СЃС‚СЂРѕР№РєРё")]
     public string appKey = "FakeAppKey_001";
     public string userId = "Player_123";
 
@@ -28,28 +28,28 @@ public class AnalyticsManager : MonoBehaviour
         }
     }
 
-    // ---------------- Инициализация SDK ----------------
+    // ---------------- РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ SDK ----------------
     private void InitializeAnalytics()
     {
         analytics = new FakeAnalyticsSDK();
         analytics.Initialize(appKey, userId);
-        Debug.Log("[AnalyticsManager] SDK инициализировано с ключом " + appKey);
-        TrackGameStart(); // Отправляем событие запуска игры
+        Debug.Log("[AnalyticsManager] SDK РёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°РЅРѕ СЃ РєР»СЋС‡РѕРј " + appKey);
+        TrackGameStart(); // РћС‚РїСЂР°РІР»СЏРµРј СЃРѕР±С‹С‚РёРµ Р·Р°РїСѓСЃРєР° РёРіСЂС‹
     }
 
-    // ---------------- События ----------------
+    // ---------------- РЎРѕР±С‹С‚РёСЏ ----------------
 
-    // Событие старта игры
+    // РЎРѕР±С‹С‚РёРµ СЃС‚Р°СЂС‚Р° РёРіСЂС‹
     public void TrackGameStart()
     {
         if (analytics.IsInitialized())
         {
             analytics.TrackGameStartEvent();
-            Debug.Log("[AnalyticsManager] Отправлено событие: GameStartEvent");
+            Debug.Log("[AnalyticsManager] РћС‚РїСЂР°РІР»РµРЅРѕ СЃРѕР±С‹С‚РёРµ: GameStartEvent");
         }
     }
 
-    // Событие перехода на уровень
+    // РЎРѕР±С‹С‚РёРµ РїРµСЂРµС…РѕРґР° РЅР° СѓСЂРѕРІРµРЅСЊ
     public void TrackLevelEvent(int levelNumber, string difficulty = "normal")
     {
         if (analytics.IsInitialized())
@@ -60,11 +60,11 @@ public class AnalyticsManager : MonoBehaviour
                 { "difficulty", difficulty }
             };
             analytics.TrackLevelEvent(levelNumber, data);
-            Debug.Log("[AnalyticsManager] Отправлено событие: LevelEvent (уровень " + levelNumber + ")");
+            Debug.Log("[AnalyticsManager] РћС‚РїСЂР°РІР»РµРЅРѕ СЃРѕР±С‹С‚РёРµ: LevelEvent (СѓСЂРѕРІРµРЅСЊ " + levelNumber + ")");
         }
     }
 
-    // Событие действия пользователя (например, просмотр рекламы)
+    // РЎРѕР±С‹С‚РёРµ РґРµР№СЃС‚РІРёСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ (РЅР°РїСЂРёРјРµСЂ, РїСЂРѕСЃРјРѕС‚СЂ СЂРµРєР»Р°РјС‹)
     public void TrackUserEvent(string eventName, string value = "")
     {
         if (analytics.IsInitialized())
@@ -75,17 +75,17 @@ public class AnalyticsManager : MonoBehaviour
                 { "value", value }
             };
             analytics.TrackEvent("UserEvent", data);
-            Debug.Log("[AnalyticsManager] Отправлено событие: UserEvent (" + eventName + ")");
+            Debug.Log("[AnalyticsManager] РћС‚РїСЂР°РІР»РµРЅРѕ СЃРѕР±С‹С‚РёРµ: UserEvent (" + eventName + ")");
         }
     }
 
-    // ---------------- Flush при потере фокуса ----------------
+    // ---------------- Flush РїСЂРё РїРѕС‚РµСЂРµ С„РѕРєСѓСЃР° ----------------
     private void OnApplicationFocus(bool hasFocus)
     {
         if (!hasFocus && analytics.IsInitialized())
         {
             analytics.Flush();
-            Debug.Log("[AnalyticsManager] Приложение свернуто — события отправлены (Flush)");
+            Debug.Log("[AnalyticsManager] РџСЂРёР»РѕР¶РµРЅРёРµ СЃРІРµСЂРЅСѓС‚Рѕ вЂ” СЃРѕР±С‹С‚РёСЏ РѕС‚РїСЂР°РІР»РµРЅС‹ (Flush)");
         }
     }
 }

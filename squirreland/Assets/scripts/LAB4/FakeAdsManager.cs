@@ -1,5 +1,7 @@
+using System.Collections;
 using UnityEngine;
-using SuperMobileAds;
+using SuperMobileAds; // пространство имён SDK
+using FakeAnalytics; // Аналитика
 
 public class AdsManager : MonoBehaviour
 {
@@ -9,7 +11,7 @@ public class AdsManager : MonoBehaviour
     private SuperMobileAdsRewarded rewarded;
     private SuperMobileAdsBanner banner;
 
-    public int rewardCoins = 1;
+    public int rewardCoins = 1; // бонус за просмотр Rewarded
 
     private void Awake()
     {
@@ -17,7 +19,61 @@ public class AdsManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            InitializeAds();
+
+            // ------------------------------
+            // Межстраничная реклама
+            // ------------------------------
+            interstitial = new SuperMobileAdsInterstitial();
+            interstitial.Initialize("Interstitial_ID");
+            interstitial.Load();
+
+            interstitial.onAdLoaded += () => Debug.Log("[AdsManager] Interstitial Loaded");
+            interstitial.onAdShown += () =>
+            {
+                Debug.Log("[AdsManager] Interstitial Shown");
+                AnalyticsManager.Instance.TrackUserEvent("InterstitialShown");
+            };
+            interstitial.onAdDismissed += () =>
+            {
+                Debug.Log("[AdsManager] Interstitial Dismissed");
+                AnalyticsManager.Instance.TrackUserEvent("InterstitialClosed");
+            };
+            interstitial.onAdClicked += () =>
+            {
+                Debug.Log("[AdsManager] Interstitial Clicked");
+                AnalyticsManager.Instance.TrackUserEvent("InterstitialClicked");
+            };
+            interstitial.onAdFailedToLoad += () => Debug.Log("[AdsManager] Interstitial Failed to Load");
+
+            // ------------------------------
+            // Вознаграждаемая реклама
+            // ------------------------------
+            rewarded = new SuperMobileAdsRewarded();
+            rewarded.Initialize("Rewarded_ID");
+            rewarded.Load();
+
+            rewarded.onAdShown += () => AnalyticsManager.Instance.TrackUserEvent("RewardedShown");
+            rewarded.onAdRewarded += () =>
+            {
+                GiveReward();
+                AnalyticsManager.Instance.TrackUserEvent("RewardedCompleted", rewardCoins.ToString());
+            };
+            rewarded.onAdDismissed += () => AnalyticsManager.Instance.TrackUserEvent("RewardedClosed");
+            rewarded.onAdClicked += () => AnalyticsManager.Instance.TrackUserEvent("RewardedClicked");
+            rewarded.onAdFailedToLoad += () => Debug.Log("[AdsManager] Rewarded Failed to Load");
+
+            // ------------------------------
+            // Баннер
+            // ------------------------------
+            banner = new SuperMobileAdsBanner();
+            banner.Initialize("Banner_ID");
+            banner.Load();
+            banner.onAdLoaded += () =>
+            {
+                Debug.Log("[AdsManager] Banner Loaded");
+                AnalyticsManager.Instance.TrackUserEvent("BannerLoaded");
+            };
+            banner.onAdFailedToLoad += () => Debug.Log("[AdsManager] Banner Failed to Load");
         }
         else
         {
@@ -25,78 +81,34 @@ public class AdsManager : MonoBehaviour
         }
     }
 
-    private void InitializeAds()
-    {
-        Debug.Log("[AdsManager] Инициализация рекламы...");
-
-        interstitial = new SuperMobileAdsInterstitial();
-        interstitial.Initialize("Interstitial_ID");
-        interstitial.Load();
-
-        interstitial.onAdLoaded += () => DebugLogAndTrack("Interstitial Loaded");
-        interstitial.onAdShown += () => DebugLogAndTrack("Interstitial Shown");
-        interstitial.onAdClicked += () => DebugLogAndTrack("Interstitial Clicked");
-        interstitial.onAdDismissed += () => DebugLogAndTrack("Interstitial Dismissed");
-        interstitial.onAdFailedToLoad += () => DebugLogAndTrack("Interstitial Failed to Load");
-
-        rewarded = new SuperMobileAdsRewarded();
-        rewarded.Initialize("Rewarded_ID");
-        rewarded.Load();
-
-        rewarded.onAdLoaded += () => DebugLogAndTrack("Rewarded Loaded");
-        rewarded.onAdShown += () => DebugLogAndTrack("Rewarded Shown");
-        rewarded.onAdRewarded += () =>
-        {
-            DebugLogAndTrack("Rewarded Completed — бонус выдан");
-            GiveReward();
-        };
-        rewarded.onAdDismissed += () => DebugLogAndTrack("Rewarded Dismissed");
-        rewarded.onAdClicked += () => DebugLogAndTrack("Rewarded Clicked");
-        rewarded.onAdFailedToLoad += () => DebugLogAndTrack("Rewarded Failed to Load");
-
-        banner = new SuperMobileAdsBanner();
-        banner.Initialize("Banner_ID");
-        banner.Load();
-
-        banner.onAdLoaded += () => DebugLogAndTrack("Banner Loaded");
-        banner.onAdFailedToLoad += () => DebugLogAndTrack("Banner Failed to Load");
-    }
-
-    // Лог + аналитика
-    private void DebugLogAndTrack(string message)
-    {
-        Debug.Log("[AdsManager] " + message);
-        AnalyticsManager.Instance?.TrackUserEvent("AdEvent", message);
-    }
-
-    public void ShowInterstitial(System.Action onClosed = null)
+    public void ShowInterstitial(System.Action callback = null)
     {
         if (interstitial != null)
         {
-            DebugLogAndTrack("Показ межстраничной рекламы");
-            interstitial.onAdDismissed += () => onClosed?.Invoke();
             interstitial.Show();
-        }
-        else
-        {
-            onClosed?.Invoke();
+            callback?.Invoke();
         }
     }
 
     public void ShowRewarded()
     {
-        DebugLogAndTrack("Попытка показа вознаграждаемой рекламы");
-        rewarded?.Show();
+        if (rewarded != null)
+        {
+            rewarded.Show();
+        }
     }
 
     public void ShowBanner()
     {
-        DebugLogAndTrack("Показ баннера");
-        banner?.Show();
+        if (banner != null)
+        {
+            banner.Show();
+        }
     }
 
     private void GiveReward()
     {
-        DebugLogAndTrack("Игрок получил " + rewardCoins + " монет за просмотр рекламы");
+        Debug.Log("[AdsManager] Игрок получил " + rewardCoins + " монету(ы) за просмотр рекламы!");
+        AnalyticsManager.Instance.TrackUserEvent("RewardCollected", rewardCoins.ToString());
     }
 }

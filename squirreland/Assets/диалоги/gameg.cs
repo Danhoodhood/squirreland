@@ -7,25 +7,23 @@ public class gameg : MonoBehaviour
     public GameObject startbutton;
     public string namelvl;
 
-    // При входе в триггер появляется кнопка "Старт"
     void OnTriggerEnter2D(Collider2D col)
     {
-        startbutton.SetActive(true); // Игрок вошёл в зону триггера — показываем кнопку "Старт"
+        startbutton.SetActive(true);
     }
 
-    // При выходе из триггера — скрываем кнопку
     void OnTriggerExit2D(Collider2D col)
     {
-        startbutton.SetActive(false);  // Игрок вышел из зоны — скрываем кнопку
+        startbutton.SetActive(false);
     }
 
-    // При нажатии кнопки — сначала показываем рекламу, потом загружаем уровень
     public void startgame()
     {
-        // Проверяем, есть ли AdsManager
+        // Отправляем событие перехода на уровень
+        AnalyticsManager.Instance.TrackLevelEvent(SceneManager.GetActiveScene().buildIndex + 1);
+
         if (AdsManager.Instance != null)
         {
-            // Показываем рекламу и переходим после закрытия
             AdsManager.Instance.ShowInterstitial(() =>
             {
                 Debug.Log("[GameG] Реклама завершена, загружаем сцену: " + namelvl);
@@ -34,8 +32,23 @@ public class gameg : MonoBehaviour
         }
         else
         {
-            // Если рекламы нет — просто загружаем сцену
             SceneManager.LoadScene(namelvl);
+        }
+    }
+
+    public void ShowRewardAds()
+    {
+        if (AdsManager.Instance != null)
+        {
+            AdsManager.Instance.ShowRewarded();
+        }
+    }
+
+    public void ShowBannerAds()
+    {
+        if (AdsManager.Instance != null)
+        {
+            AdsManager.Instance.ShowBanner();
         }
     }
 }
