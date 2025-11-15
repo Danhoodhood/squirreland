@@ -28,21 +28,29 @@ public class AdsManager : MonoBehaviour
             interstitial.Load();
 
             interstitial.onAdLoaded += () => Debug.Log("[AdsManager] Interstitial Loaded");
+
+            // ? ДОБАВЛЕНО: ставим игру на паузу при показе рекламы
             interstitial.onAdShown += () =>
             {
                 Debug.Log("[AdsManager] Interstitial Shown");
+                PauseGame(true); // ? НОВОЕ
                 AnalyticsManager.Instance.TrackUserEvent("InterstitialShown");
             };
+
+            // ? ДОБАВЛЕНО: снимаем игру с паузы после закрытия рекламы
             interstitial.onAdDismissed += () =>
             {
                 Debug.Log("[AdsManager] Interstitial Dismissed");
+                PauseGame(false); // ? НОВОЕ
                 AnalyticsManager.Instance.TrackUserEvent("InterstitialClosed");
             };
+
             interstitial.onAdClicked += () =>
             {
                 Debug.Log("[AdsManager] Interstitial Clicked");
                 AnalyticsManager.Instance.TrackUserEvent("InterstitialClicked");
             };
+
             interstitial.onAdFailedToLoad += () => Debug.Log("[AdsManager] Interstitial Failed to Load");
 
             // ------------------------------
@@ -52,13 +60,26 @@ public class AdsManager : MonoBehaviour
             rewarded.Initialize("Rewarded_ID");
             rewarded.Load();
 
-            rewarded.onAdShown += () => AnalyticsManager.Instance.TrackUserEvent("RewardedShown");
+            // ? ДОБАВЛЕНО: пауза при показе Rewarded
+            rewarded.onAdShown += () =>
+            {
+                PauseGame(true); // ? НОВОЕ
+                AnalyticsManager.Instance.TrackUserEvent("RewardedShown");
+            };
+
             rewarded.onAdRewarded += () =>
             {
                 GiveReward();
                 AnalyticsManager.Instance.TrackUserEvent("RewardedCompleted", rewardCoins.ToString());
             };
-            rewarded.onAdDismissed += () => AnalyticsManager.Instance.TrackUserEvent("RewardedClosed");
+
+            // ? ДОБАВЛЕНО: снятие паузы после закрытия Rewarded
+            rewarded.onAdDismissed += () =>
+            {
+                PauseGame(false); // ? НОВОЕ
+                AnalyticsManager.Instance.TrackUserEvent("RewardedClosed");
+            };
+
             rewarded.onAdClicked += () => AnalyticsManager.Instance.TrackUserEvent("RewardedClicked");
             rewarded.onAdFailedToLoad += () => Debug.Log("[AdsManager] Rewarded Failed to Load");
 
@@ -68,12 +89,15 @@ public class AdsManager : MonoBehaviour
             banner = new SuperMobileAdsBanner();
             banner.Initialize("Banner_ID");
             banner.Load();
+
             banner.onAdLoaded += () =>
             {
                 Debug.Log("[AdsManager] Banner Loaded");
                 AnalyticsManager.Instance.TrackUserEvent("BannerLoaded");
             };
-            banner.onAdFailedToLoad += () => Debug.Log("[AdsManager] Banner Failed to Load");
+
+            banner.onAdFailedToLoad += () =>
+                Debug.Log("[AdsManager] Banner Failed to Load");
         }
         else
         {
@@ -110,5 +134,14 @@ public class AdsManager : MonoBehaviour
     {
         Debug.Log("[AdsManager] Игрок получил " + rewardCoins + " монету(ы) за просмотр рекламы!");
         AnalyticsManager.Instance.TrackUserEvent("RewardCollected", rewardCoins.ToString());
+    }
+
+    // --------------------------------------------
+    // НОВЫЙ МЕТОД: ставит/снимает игру с паузы
+    // --------------------------------------------
+    private void PauseGame(bool pause)
+    {
+        Time.timeScale = pause ? 0 : 1;
+        Debug.Log("[AdsManager] Game paused: " + pause);
     }
 }

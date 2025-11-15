@@ -1,26 +1,34 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using FakeAnalytics; // Пространство имён SDK аналитики
+﻿using UnityEngine;
 
-// Менеджер аналитики — инициализация и управление событиями
-// Реализует все пункты лабораторной: события, инициализацию, flush при потере фокуса
+// Главный менеджер аналитики.
+// Хранится между сценами (DontDestroyOnLoad)
+// и работает через интерфейс IAnalyticsProvider.
 public class AnalyticsManager : MonoBehaviour
 {
+    // Глобальный доступ (Singleton)
     public static AnalyticsManager Instance;
 
-    private FakeAnalyticsSDK analytics;
+    // Текущий провайдер аналитики (может быть любой SDK)
+    private IAnalyticsProvider provider;
 
     [Header("SDK Настройки")]
-    public string appKey = "FakeAppKey_001";
-    public string userId = "Player_123";
+    public string appKey = "FakeAppKey_001"; // Ключ SDK
+    public string userId = "Player_123";     // ID игрока
 
     private void Awake()
     {
+        // Стандартная реализация Singleton
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            InitializeAnalytics();
+
+            // Инициализируем провайдер
+            provider = new FakeAnalyticsProvider();
+            provider.Initialize(appKey, userId);
+
+            // Отправляем событие старта игры
+            TrackGameStart();
         }
         else
         {
@@ -28,64 +36,47 @@ public class AnalyticsManager : MonoBehaviour
         }
     }
 
-    // ---------------- Инициализация SDK ----------------
-    private void InitializeAnalytics()
-    {
-        analytics = new FakeAnalyticsSDK();
-        analytics.Initialize(appKey, userId);
-        Debug.Log("[AnalyticsManager] SDK инициализировано с ключом " + appKey);
-        TrackGameStart(); // Отправляем событие запуска игры
-    }
+    // ------------------- События -------------------
 
-    // ---------------- События ----------------
-
-    // Событие старта игры
+    // Событие начала игры
     public void TrackGameStart()
     {
-        if (analytics.IsInitialized())
+        if (provider.IsInitialized)
         {
-            analytics.TrackGameStartEvent();
-            Debug.Log("[AnalyticsManager] Отправлено событие: GameStartEvent");
+            provider.TrackGameStart();
+            Debug.Log("[Analytics] GameStartEvent sent");
         }
     }
 
     // Событие перехода на уровень
     public void TrackLevelEvent(int levelNumber, string difficulty = "normal")
     {
-        if (analytics.IsInitialized())
+        if (provider.IsInitialized)
         {
-            var data = new Dictionary<string, string>()
-            {
-                { "level_number", levelNumber.ToString() },
-                { "difficulty", difficulty }
-            };
-            analytics.TrackLevelEvent(levelNumber, data);
-            Debug.Log("[AnalyticsManager] Отправлено событие: LevelEvent (уровень " + levelNumber + ")");
+            provider.TrackLevel(levelNumber, difficulty);
+            Debug.Log("[Analytics] LevelEvent sent (Level " + levelNumber + ")");
         }
     }
 
-    // Событие действия пользователя (например, просмотр рекламы)
+    // Пользовательские события (клики, кнопки и т.д.)
     public void TrackUserEvent(string eventName, string value = "")
     {
-        if (analytics.IsInitialized())
+        if (provider.IsInitialized)
         {
-            var data = new Dictionary<string, string>()
-            {
-                { "action", eventName },
-                { "value", value }
-            };
-            analytics.TrackEvent("UserEvent", data);
-            Debug.Log("[AnalyticsManager] Отправлено событие: UserEvent (" + eventName + ")");
+            provider.TrackUserEvent(eventName, value);
+            Debug.Log("[Analytics] UserEvent: " + eventName);
         }
     }
 
-    // ---------------- Flush при потере фокуса ----------------
-    private void OnApplicationFocus(bool hasFocus)
+    // ------------------- Flush при потере фокуса -------------------
+    // Когда приложение сворачивается — отправляем накопленные события
+    private void OnApplicationFocus(bool focus)
     {
-        if (!hasFocus && analytics.IsInitialized())
+        // Если окно потеряло фокус — делаем flush
+        if (!focus && provider.IsInitialized)
         {
-            analytics.Flush();
-            Debug.Log("[AnalyticsManager] Приложение свернуто — события отправлены (Flush)");
+            provider.Flush();
+            Debug.Log("[Analytics] Flush executed (focus lost)");
         }
     }
 }
