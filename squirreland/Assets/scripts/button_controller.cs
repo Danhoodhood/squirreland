@@ -50,4 +50,8 @@ public class MenuController : MonoBehaviour
     {
         SceneManager.LoadScene("Game");
     }
+    public void leaderboard()
+    {
+        SceneManager.LoadScene("DemoScene");
+    }
 }

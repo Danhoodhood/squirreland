@@ -39,7 +39,7 @@ public class End_game : MonoBehaviour
         score_text.text = string.Format("набрано {0} очков", GlobalScore.score); // Выводим очки
 
         Time.timeScale = 0f;               // Останавливаем время в игре
-
+        SaveHighScore(GlobalScore.score); // сохраняем максимальноье значение
         // Проверяем, хватило ли очков для успешного прохождения
         if (GlobalScore.score <= minValue)
         {
@@ -63,5 +63,31 @@ public class End_game : MonoBehaviour
     {
         GlobalScore.score = 0;           // Сбрасываем очки
         SceneManager.LoadScene(sceneIndex); // Загружаем сцену по индексу
+    }
+  
+    public void SaveHighScore(int newScore)
+    {
+        // Получаем текущий рекорд (по умолчанию 0, если ключа нет)
+        int currentHighScore = PlayerPrefs.GetInt("High_Score", 0);
+
+        // Сравниваем с новым значением
+        if (newScore > currentHighScore)
+        {
+            // Сохраняем новый рекорд
+            PlayerPrefs.SetInt("High_Score", newScore);
+            PlayerPrefs.Save(); // Сохраняем изменения на диск
+
+            Debug.Log($"Новый рекорд: {newScore} (предыдущий: {currentHighScore})");
+        }
+        else
+        {
+            Debug.Log($"Текущий рекорд: {currentHighScore}. Новый результат: {newScore}");
+        }
+    }
+
+    // Метод для получения текущего рекорда
+    public int GetHighScore()
+    {
+        return PlayerPrefs.GetInt("High_Score", 0);
     }
 }
