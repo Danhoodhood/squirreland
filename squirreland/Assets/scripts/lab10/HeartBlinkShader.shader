@@ -3,8 +3,8 @@ Shader "Custom/HeartBlinkShader"
     Properties
     {
         _MainTex ("Sprite Texture", 2D) = "white" {}
-        _StartColor ("Start Color", Color) = (1,0,0,1) // красный
-        _EndColor ("End Color", Color) = (1,1,0,1)     // жёлтый
+        _StartColor ("Start Color", Color) = (1,0,0,1) // синий
+        _EndColor ("End Color", Color) = (1,1,0,1)     // белый
         _TimeValue ("Time", Float) = 0
         _BlinkSpeed ("Blink Speed", Float) = 3.0
     }
