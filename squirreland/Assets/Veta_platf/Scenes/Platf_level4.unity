@@ -14769,6 +14769,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 31df9d45732331944b3d2f9678940aa1, type: 3}
     - target: {fileID: 5380237919576174848, guid: a4f9ed5b3f69ccc418028acd073199bc, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: aaf6091762c541742afba7230192e751, type: 2}
+    - target: {fileID: 5380237919576174848, guid: a4f9ed5b3f69ccc418028acd073199bc, type: 3}
       propertyPath: m_UseSpriteMesh
       value: 1
       objectReference: {fileID: 0}
@@ -18180,6 +18184,7 @@ GameObject:
   - component: {fileID: 678268597}
   - component: {fileID: 678268599}
   - component: {fileID: 678268598}
+  - component: {fileID: 678268600}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -18247,6 +18252,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 678268596}
   m_CullTransparentMesh: 1
+--- !u!114 &678268600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678268596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 364fd62ebbd4a7847aa10cc45deb3345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartMaterial: {fileID: 2100000, guid: aaf6091762c541742afba7230192e751, type: 2}
+  blinkSpeed: 1
 --- !u!1 &685498951
 GameObject:
   m_ObjectHideFlags: 0
@@ -21671,6 +21690,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 31df9d45732331944b3d2f9678940aa1, type: 3}
     - target: {fileID: 291367449596751817, guid: a547b2fe2cb8aa945ab4d5dedfb5d0c1, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: aaf6091762c541742afba7230192e751, type: 2}
+    - target: {fileID: 291367449596751817, guid: a547b2fe2cb8aa945ab4d5dedfb5d0c1, type: 3}
       propertyPath: m_UseSpriteMesh
       value: 1
       objectReference: {fileID: 0}
@@ -21901,6 +21924,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 31df9d45732331944b3d2f9678940aa1, type: 3}
+    - target: {fileID: 7711507592230430960, guid: 98315f33b6ea83247a55b70b4dd056c0, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: aaf6091762c541742afba7230192e751, type: 2}
     - target: {fileID: 7711507592230430960, guid: 98315f33b6ea83247a55b70b4dd056c0, type: 3}
       propertyPath: m_UseSpriteMesh
       value: 1
